@@ -1,0 +1,329 @@
+﻿@model List<TravelApp.Models.Booking>
+
+<link rel="stylesheet" href="~/css/Admin.css?v=2">
+
+    <div class="admin-container">
+
+        <!-- HEADER -->
+        <div class="admin-header">
+            <h2>Admin Dashboard</h2>
+            <a href="/Login/Logout" class="logout-btn">Logout</a>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <h3>Total Bookings</h3>
+                <p>@(Model?.Count ?? 0)</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <p>₹@(Model != null ? Model.Sum(x => x.TotalAmount) : 0)</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Wishlist Items</h3>
+                <p>@ViewBag.WishlistCount</p>
+            </div>
+        </div>
+        <!-- TABS -->
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="showTab('bookings')">Bookings</button>
+            <button class="tab-btn" onclick="showTab('users')">Users</button>
+            <button class="tab-btn" onclick="showTab('contacts')">Contacts</button>
+            <button class="tab-btn" onclick="showTab('reviews')">Reviews</button>
+            <button onclick="showTab('subscribers')" class="tab-btn">Subscribers</button>
+   
+        </div>
+
+
+        <!-- BOOKINGS TAB -->
+        <div id="bookings" class="tab-content active">
+
+            <h3>All Bookings</h3>
+
+            <div class="table-wrapper">
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>User</th>
+                        <th>Package</th>
+                        <th>Members</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Process</th>
+                        <th>Payment</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        foreach (var booking in Model)
+                        {
+                            <tr>
+                            <td>@booking.Id</td>
+                            <td>@booking.UserEmail</td>
+                            <td>@booking.PackageName</td>
+                            <td>@booking.Members</td>
+                            <td>₹@booking.TotalAmount</td>
+
+                            <td>
+                                <select onchange="updateStatus(@booking.Id, this.value)">
+                                    <option selected>@booking.Status</option>
+                                    <option>Pending</option>
+                                    <option>Confirmed</option>
+                                    <option>Cancelled</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select onchange="updateProcess(@booking.Id, this.value)">
+                                    <option selected>@booking.Process</option>
+                                    <option>Visa Processing</option>
+                                    <option>Ticket Booked</option>
+                                    <option>Completed</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select onchange="updatePayment(@booking.Id, this.value)">
+                                    <option selected>@booking.PaymentStatus</option>
+                                    <option>Pending</option>
+                                    <option>Paid</option>
+                                    <option>Failed</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <button onclick="deleteBooking(@booking.Id)" class="delete-btn">
+                                    Delete
+                                </button>
+                            </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+
+        <!-- USERS TAB -->
+        <div id="users" class="tab-content">
+
+            <h3>User Activity</h3>
+
+            <table class="styled-table">
+                <tr>
+                    <th>Email</th>
+                    <th>Bookings</th>
+                    <th>Wishlist</th>
+                </tr>
+
+                @if (ViewBag.UserStats != null)
+                {
+                    foreach (var user in ViewBag.UserStats)
+                    {
+                        <tr>
+                            <td>@user.Email</td>
+                            <td>@user.BookingCount</td>
+                            <td>@user.WishlistCount</td>
+                        </tr>
+                    }
+                }
+            </table>
+
+        </div>
+
+
+        <!-- CONTACT TAB -->
+        <div id="contacts" class="tab-content">
+
+            <h3>Contact Enquiries</h3>
+
+            <div class="contact-list">
+
+                @if (ViewBag.Contacts != null)
+                {
+                    foreach (var c in ViewBag.Contacts)
+                    {
+                        <div class="contact-card">
+
+                            <div class="contact-header">
+                                <div>
+                                    <h4>@c.FirstName @c.LastName</h4>
+                                    <p class="email">@c.Email</p>
+                                    <p class="phone">@c.Phone</p>
+                                    <span class="tag">@c.EnquiryType</span>
+                                </div>
+
+                                <form asp-controller="Admin" asp-action="DeleteContact" method="post">
+                                    <input type="hidden" name="id" value="@c.Id" />
+                                    <button class="delete-btn">Delete</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    }
+                }
+
+            </div>
+
+        </div>
+
+   
+    <!-- REVIEWS TAB -->
+    <div id="reviews" class="tab-content">
+        <h3 class="section-title">Customer Reviews</h3>
+            <div class="table-wrapper narrow">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (ViewBag.Reviews != null)
+                {
+                    foreach (var r in ViewBag.Reviews)
+                    {
+                        <tr>
+                            <td>@r.Name</td>
+
+                            <td>
+                                @for (int i = 0; i < r.Rating; i++)
+                                {
+                                    <span style="color:#fbbf24;">★</span>
+                                }
+                            </td>
+
+                            <td>@r.Comment</td>
+
+                            <td>
+                                <form asp-controller="Admin" asp-action="DeleteReview" method="post">
+                                    <input type="hidden" name="id" value="@r.Id" />
+                                    <button class="delete-btn">Delete</button>
+                                </form>
+                            </td>
+                                   
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+   <!--Subscriber-->
+    <div id="subscribers" class="tab-content">
+            <h3 class="section-title">Subscribers</h3>
+            <div class="table-wrapper narrow">
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subscribed On</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in ViewBag.Subscribers)
+                {
+                    <tr>
+                        <td>@(s.Name ?? "User")</td>
+                        <td>@s.Email</td>
+                        <td>@DateTime.Now.ToString("dd MMM yyyy")</td>
+                                <td><form asp-controller="Admin" asp-action="DeleteSubscriber" method="post">
+                                    <input type="hidden" name="id" value="@s.Id" />
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form></td>
+                            </tr>
+                }
+            </tbody>
+        </table>
+        </div>  
+    </div>
+
+    <div class="admin-actions">
+
+        <a href="/Packages/Create" class="admin-btn primary">
+            ➕ Add Package
+        </a>
+            
+           
+            
+        <form asp-controller="Admin" asp-action="ClearBookings" method="post">
+            <button class="admin-btn danger">🗑 Clear All</button>
+        </form>
+
+        <button onclick="saveData()" class="admin-btn success">
+            💾 Save Data
+        </button>
+
+    </div>
+    </div>
+    <script>
+        function showTab(tabId){
+
+            document.querySelectorAll(".tab-content").forEach(tab=>{
+                tab.classList.remove("active")
+            })
+
+            document.querySelectorAll(".tab-btn").forEach(btn=>{
+                btn.classList.remove("active")
+            })
+
+            document.getElementById(tabId).classList.add("active")
+            event.target.classList.add("active")
+
+        }
+                function showTab(tabName) {
+            document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+            document.getElementById(tabName).classList.add("active");
+            event.target.classList.add("active");
+        }
+                 function updateStatus(id, status) {
+            fetch('/Admin/UpdateStatus', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id=${id}&status=${status}`
+            });
+        }
+
+        function updateProcess(id, process) {
+            fetch('/Admin/UpdateProcess', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id=${id}&process=${process}`
+            });
+        }
+
+        function updatePayment(id, payment) {
+            fetch('/Admin/UpdatePayment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id=${id}&payment=${payment}`
+            });
+        }
+
+        function deleteBooking(id) {
+            if (confirm("Delete this booking?")) {
+                window.location.href = "/Admin/DeleteBooking/" + id;
+            }
+        }
+
+        function saveData() {
+            alert("Data saved successfully ✅");
+        }
+    </script>

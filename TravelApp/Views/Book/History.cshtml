@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TravelApp.Models.Booking>
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<link rel="stylesheet" href="~/css/History.css">
+
+    <div class="booking-page">
+
+        <h1 class="booking-title">My Bookings</h1>
+
+        <!-- ✅ CLEAR BUTTON HERE -->
+        
+        @if (Model != null && Model.Any())
+        {
+            <div class="booking-container">
+                @foreach (var item in Model)
+                {
+                    <div class="booking-card" id="card-@item.Id">
+                        <h3>@item.PackageName</h3>
+                        <p><b>Booking Id:</b> @item.Id</p>
+                        <p><b>Members:</b> @item.Members</p>
+                        <p><b>Total:</b> ₹@item.TotalAmount</p>
+                        
+                    </div>
+                   
+                }
+            </div>
+        }
+        else
+        {
+            <div class="no-bookings">
+                <h3>No bookings found</h3>
+                <p>Start exploring and book your next trip ✈️</p>
+            </div>
+        }
+
+    </div>
+
+    <script src="~/js/history.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

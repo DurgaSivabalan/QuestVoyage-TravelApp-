@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Contact Form";
+    
+}
+    <link rel="stylesheet" href="~/css/Form.css">
+    @{
+        ViewData["Title"] = "Contact Form";
+    
+    }
+    <link rel="stylesheet" href="~/css/Form.css">
+    
+        <section class="contact-wrapper">
+
+            <div class="contact-container">
+
+                <h2>Contact Support</h2>
+                <p class="subtitle">We’ll help you with bookings & queries</p>
+
+                <form id="contactForm">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" name="FirstName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" name="LastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="Email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" name="Phone" required>
+                        </div>
+                    </div>
+
+                    <div class="enquiry-section">
+                        <p>Enquiry Type</p>
+
+                        <div class="radio-group">
+                            <label><input type="radio" name="EnquiryType" value="Flight Booking"> Flight</label>
+                            <label><input type="radio" name="EnquiryType" value="Hotel Booking"> Hotel</label>
+                            <label><input type="radio" name="EnquiryType" value="Package Booking"> Package</label>
+                            <label><input type="radio" name="EnquiryType" value="Place Booking"> Place</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Send Message</button>
+                    <p id="successMessage"></p>
+                    <p id="errorMessage"></p>
+                </form>
+
+            </div>
+
+        </section>
+<script src="~/js/form.js"></script>
+ 
+<script src="~/js/form.js"></script>
+
+
+ 

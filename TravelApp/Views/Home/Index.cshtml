@@ -1,0 +1,239 @@
+﻿@inject TravelApp.Models.AppDbContext _context
+@{
+    var user = ViewBag.User;
+    var bookings = ViewBag.Bookings;
+}
+
+@{
+    var email = Context.Session.GetString("User");
+
+    int wishlistCount = 0;
+
+    if (email != null)
+    {
+        wishlistCount = _context.Wishlists.Count(x => x.UserEmail == email);
+    }
+}
+
+<link rel="stylesheet" href="~/css/Style.css"/>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="close-btn" id="closeBtn">✕</div>
+
+    <h3 class="text-center">Quick Links</h3>
+
+   <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="/Flights/Flights">Top Bookings</a></li>
+    <li><a href="/About/About">About</a></li>
+    <li><a href="/Testimonial/Testimonial">Testimonial</a></li>
+</ul>
+   
+
+    <section class="sidebar-box contact-box">
+        <h4>📞 Contact Us</h4>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> support@questvoyage.com</p>
+        <a asp-controller="Form" asp-action="Form" class="contact-link">Send Message</a>
+    </section>
+</aside>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- HEADER -->
+<header style="display:flex; flex-direction: column; gap: 20px">
+
+    <section class="navi">
+
+        <!-- LEFT -->
+        <div class="nav-left">
+            <img src="~/images/logo.jpg" class="logo-img" />
+            <h2 class="logo-text">QuestVoyage</h2>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="nav-right">
+
+            <a asp-controller="Book" asp-action="Book" class="book-btn">
+                Book Trip
+            </a>
+
+            <!-- ICONS -->
+            <div class="icon-btn">
+                <a asp-controller="Wishlist" asp-action="Wishlist">
+                    <img src="~/images/wishlist icon.png" />
+                    @if (wishlistCount > 0)
+                    {
+                        <span class="badge">@wishlistCount</span>
+                    }
+                </a>
+            </div>
+
+            <div class="icon-btn">
+                <a asp-controller="Packages" asp-action="Index">
+                    <img src="~/images/filter.png" />
+                </a>
+            </div>
+
+            <!-- PROFILE -->
+            <div class="profile-wrapper">
+                <div class="nav-avatar" id="profileToggle">
+                    @Context.Session.GetString("User")?.Substring(0,1).ToUpper()
+                </div>
+
+                <div class="profile-dropdown" id="profileBox">
+                    <a asp-controller="Profile" asp-action="Profile" class="dropdown-item">
+                        👤 @Context.Session.GetString("User")
+                    </a>
+                    <a asp-controller="Book" asp-action="History" class="dropdown-item">
+                        📖 My Bookings
+                    </a>
+                    <form asp-controller="Login" asp-action="Logout" method="post">
+                        <button class="dropdown-item logout-btn">Logout</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- HAMBURGER -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+    </section>
+</header>
+
+<!-- CONTENT -->
+<section class="welcome">
+    <section class="text-center">
+        <h1>Welcome to "Dream Destination"</h1>
+        <h3>
+            "Travel far enough, you meet yourself,
+            Let us plan the journey you'll never forget."
+        </h3>
+
+        <section class="explore">
+            <button>
+                <a asp-controller="Flights" asp-action="Flights">Explore More</a>
+            </button>
+        </section>
+    </section>
+</section>
+    <section class="grid-section">
+      <h2>Our Popular Destinations</h2>
+      <div class="grid-container">
+        <div class="grid-item reveal">
+          <img src="~/images/paris.jpg" alt="Destination 1" />
+          <h3>Paris</h3>
+          <p>Experience the city of lights and romance.</p>
+        </div>
+        <div class="grid-item reveal">
+          <img src="~/images/tokyo.jpg" alt="Destination 2" />
+          <h3>Tokyo</h3>
+          <p>Discover modern culture and ancient traditions.</p>
+        </div>
+        <div class="grid-item reveal">
+          <img src="~/images/newyork.jpg" alt="Destination 3" />
+          <h3>New York</h3>
+          <p>The city that never sleeps awaits you.</p>
+        </div>
+        <div class="grid-item reveal">
+          <img src="~/images/london.jpg" alt="Destination 4" />
+          <h3>London</h3>
+          <p>Explore royal heritage and historic landmarks.</p>
+        </div>
+        <div class="grid-item reveal">
+          <img src="~/images/dubai.jpg" alt="Destination 5" />
+          <h3>Dubai</h3>
+          <p>Luxury and innovation combined.</p>
+        </div>
+        <div class="grid-item reveal">
+          <img src="~/images/singapore.jpg" alt="Destination 6" />
+          <h3>Singapore</h3>
+          <p>Modern city with vibrant culture.</p>
+        </div>
+        <div class="grid-item reveal">
+          <img src="~/images/barcelona.jpg" alt="Destination 7" />
+          <h3>Barcelona</h3>
+          <p>Art, architecture, and beach vibes.</p>
+        </div>
+        <div class="grid-item reveal">
+          <img src="~/images/sydney.jpg" alt="Destination 8" />
+          <h3>Sydney</h3>
+          <p>Beautiful beaches and iconic landmarks.</p>
+        </div>
+      </div>
+    </section>
+  <section class="newsletter-section">
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>
+        Get exclusive travel deals, destination guides, and special offers
+        delivered to your inbox!
+    </p>
+    <form id="subscribeForm">
+  <input id="nameInput" name="Name" type="text" />
+  <input id="emailInput" name="Email" type="email" />
+  <button type="submit">Subscribe</button>
+</form>
+<div id="subscribeMessage"></div>
+
+    <span class="note">No spam. Unsubscribe anytime.</span>
+</section>
+    <footer class="footer">
+      <section class="footer-container">
+        <section class="flex">
+          <h3>Branch Offices</h3>
+          <ul>
+            <li>Chennai</li>
+            <li>Bangalore</li>
+            <li>Kochi</li>
+            <li>Delhi</li>
+          </ul>
+        </section>
+
+        <section class="flex">
+          <h3>Follow Us</h3>
+          <section class="socialmedia">
+            <a href="https://www.instagram.com">
+              <img
+                src="~/images/Insta.png" alt="insta"
+                style="width: 30px; height: 30px"
+              />Instagram</a
+            ><br />
+            <a href="https://www.facebook.com" 
+              ><img
+                src="~/images/Face.png" alt="face"
+                style="width: 30px; height: 30px"
+              />Facebook</a
+            ><br />
+            <a href="https://www.twitter.com" 
+              ><img
+                src="~/images/twitterss.png" alt="twitter"
+                style="width: 30px; height: 30px"
+              />Twitter</a
+            >
+          </section>
+        </section>
+
+        <section class="flex">
+          <h3>Contact</h3>
+          <p>📞 +91 98765 43210</p>
+          <p>✉️ support@travelagency.com</p>
+          <a href="https://maps.google.com"  style="text-decoration: none; color: black  ;">📍 View on Map</a>
+        </section>
+      </section>
+
+      <p class="footer-bottom">© 2026 Travel Agency. All Rights Reserved.</p>
+    </footer>
+
+    
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="~/js/auth.js"></script>
+<script src="~/js/newsletter.js"></script>
+<script src="~/js/script.js" asp-append-version="true"></script>

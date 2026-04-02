@@ -1,0 +1,123 @@
+﻿/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* FULL SCREEN CENTER */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* CONTAINER */
+.auth-container {
+    width: 100%;
+    max-width: 380px;
+}
+
+/* CARD */
+.auth-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+    /* TITLE */
+    .auth-box h2 {
+        margin-bottom: 25px;
+        color: #333;
+        font-size: 24px;
+    }
+
+    /* INPUT */
+    .auth-box input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+        /* INPUT FOCUS */
+        .auth-box input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 8px rgba(102,126,234,0.4);
+            outline: none;
+        }
+
+    /* BUTTON */
+    .auth-box button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #667eea, #5563c1);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        /* BUTTON HOVER */
+        .auth-box button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #5563c1, #3f4db5);
+        }
+
+    /* ERROR MESSAGE */
+    .auth-box p {
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+/* LINK TEXT */
+.switch-link {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+    .switch-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+
+/* SMALL ANIMATION */
+.auth-box {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+header{
+    display:inline;
+    background-color:white;
+    
+    color:black;
+}

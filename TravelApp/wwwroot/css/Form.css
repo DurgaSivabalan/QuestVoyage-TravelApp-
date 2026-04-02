@@ -1,0 +1,349 @@
+﻿/* ============================================
+   LUXURY LIGHT THEME — Travel Contact Form
+   Ivory + Charcoal + Gold
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #f7f4ef, #efe7dc);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    /* Subtle warm texture */
+    background-image: radial-gradient(ellipse at 20% 50%, rgba(196, 164, 106, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(196, 164, 106, 0.06) 0%, transparent 50%);
+}
+
+/* ---------- Card ---------- */
+.contact-container {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(196, 164, 106, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 20px 60px rgba(44, 36, 22, 0.08);
+    max-width: 600px;
+    width: 100%;
+    padding: 3.5rem 3rem;
+    animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Gold top accent */
+.contact-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    right: 3rem;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c4a46a, #d4b97a, #c4a46a, transparent);
+    border-radius: 2px;
+}
+
+/* ---------- Heading ---------- */
+.contact-container h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 2.4rem;
+    text-align: center;
+    color: #1e1e1e;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.3rem;
+}
+
+.contact-container > p,
+.contact-container .subtitle {
+    text-align: center;
+    color: #8a8278;
+    font-size: 0.92rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin-bottom: 2.5rem;
+}
+
+    /* Decorative gold divider */
+    .contact-container > p::after,
+    .contact-container .subtitle::after {
+        content: '✦';
+        display: block;
+        color: #c4a46a;
+        font-size: 0.7rem;
+        margin-top: 1.2rem;
+        letter-spacing: 0.5em;
+    }
+
+/* ---------- Form Grid ---------- */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    /* ---------- Labels ---------- */
+    .form-group label {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #9a9084;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    /* ---------- Inputs ---------- */
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="number"],
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 0.85rem 1.1rem;
+        border: 1px solid #e5ddd2;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 400;
+        color: #2c2418;
+        background: #faf8f5;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+        .form-group input:hover,
+        .form-group textarea:hover {
+            border-color: #d4c4a8;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #c4a46a;
+            background: #fffdf9;
+            box-shadow: 0 0 0 3px rgba(196, 164, 106, 0.12);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #c0b8ac;
+            font-weight: 300;
+        }
+
+/* ---------- Enquiry Type ---------- */
+.enquiry-section {
+    margin-bottom: 1.75rem;
+}
+
+    .enquiry-section h4,
+    .enquiry-section > label,
+    .enquiry-section > p {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #9a9084;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        margin-bottom: 0.85rem;
+    }
+
+.radio-group {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        border: 1px solid #e5ddd2;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 0.88rem;
+        font-weight: 400;
+        color: #7a7064;
+        background: #faf8f5;
+        transition: all 0.25s ease;
+        user-select: none;
+        text-transform: none;
+        letter-spacing: normal;
+        margin-bottom: 0;
+    }
+
+        .radio-group label:hover {
+            border-color: #c4a46a;
+            color: #4a4030;
+            background: #fdf8f0;
+        }
+
+    /* Custom radio */
+    .radio-group input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid #c8bfb2;
+        border-radius: 50%;
+        margin: 0;
+        transition: all 0.2s ease;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+        .radio-group input[type="radio"]:checked {
+            border-color: #c4a46a;
+        }
+
+            .radio-group input[type="radio"]:checked::after {
+                content: '';
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #c4a46a;
+            }
+
+    .radio-group label:has(input:checked) {
+        border-color: #c4a46a;
+        background: #faf3e6;
+        color: #2c2418;
+        font-weight: 500;
+    }
+
+/* ---------- Submit Button ---------- */
+.btn-submit,
+button[type="submit"],
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(135deg, #2c2418, #3d3226);
+    box-shadow: 0 4px 16px rgba(44, 36, 24, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 0.35s ease;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+    /* Gold shimmer on hover */
+    .btn-submit::after,
+    button[type="submit"]::after,
+    input[type="submit"]::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(196, 164, 106, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .btn-submit:hover,
+    button[type="submit"]:hover,
+    input[type="submit"]:hover {
+        background: linear-gradient(135deg, #3d3226, #4a3c2e);
+        box-shadow: 0 8px 28px rgba(44, 36, 24, 0.28);
+        transform: translateY(-2px);
+    }
+
+        .btn-submit:hover::after,
+        button[type="submit"]:hover::after {
+            left: 120%;
+        }
+
+    .btn-submit:active,
+    button[type="submit"]:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(44, 36, 24, 0.2);
+    }
+
+/* ---------- Validation (ASP.NET) ---------- */
+.text-danger,
+.field-validation-error {
+    color: #c0392b;
+    font-size: 0.78rem;
+    margin-top: 0.3rem;
+}
+
+.input-validation-error {
+    border-color: #c0392b !important;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08) !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 540px) {
+    body {
+        padding: 1rem;
+    }
+
+    .contact-container {
+        padding: 2.5rem 1.5rem;
+        border-radius: 16px;
+    }
+
+        .contact-container::before {
+            left: 1.5rem;
+            right: 1.5rem;
+        }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin-bottom: 0;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .radio-group {
+        flex-direction: column;
+    }
+
+    .contact-container h2 {
+        font-size: 1.8rem;
+    }
+}

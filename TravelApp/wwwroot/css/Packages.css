@@ -1,0 +1,82 @@
+﻿body {
+    margin: 0;
+    font-family: Arial;
+    background: #f4f6fb;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: white;
+    margin: 0;
+}
+
+.filter-box {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    justify-content: center;
+    background: white;
+    flex-wrap: wrap;
+}
+
+    .filter-box select,
+    .filter-box button {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: .3s;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+.price {
+    color: green;
+    font-weight: bold;
+}
+
+.button-group {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.wishlist-btn {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.book-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.wishlist-btn,.book-btn{
+    list-style-type:none;
+    color:black;
+}

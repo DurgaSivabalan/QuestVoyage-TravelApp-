@@ -1,0 +1,145 @@
+﻿/* PAGE */
+.booking-page {
+    background: #f1f5f9;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* HEADER */
+.booking-title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 35px;
+}
+
+/* GRID */
+.booking-container {
+    display: grid;
+    grid-template-columns: repeat(2, 420px);
+    justify-content: center;
+    gap: 30px;
+}
+
+/* CARD */
+.booking-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+    .booking-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+/* TOP */
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .card-top h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+/* DETAILS */
+.card-details {
+    margin-top: 10px;
+}
+
+    .card-details p {
+        margin: 6px 0;
+        color: #64748b;
+        font-size: 15px;
+    }
+
+/* PRICE */
+.price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2563eb;
+    margin-top: 10px;
+}
+
+/* STATUS BADGE */
+.status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+    /* STATUS COLORS */
+    .status.confirmed {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+
+    .status.pending {
+        background: #fef9c3;
+        color: #ca8a04;
+    }
+
+    .status.failed {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+/* TIMELINE */
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    padding: 6px;
+    border-radius: 10px;
+    background: #e2e8f0;
+    margin: 0 3px;
+}
+
+    .step.active {
+        background: #2563eb;
+        color: white;
+    }
+
+/* BUTTON */
+.invoice-btn {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+    .invoice-btn:hover {
+        background: #1d4ed8;
+    }
+.clear-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+    .clear-btn:hover {
+        background: #dc2626;
+    }  

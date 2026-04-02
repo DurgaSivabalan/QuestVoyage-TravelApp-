@@ -1,0 +1,98 @@
+﻿@{
+    var user = ViewBag.User;
+    var bookings = ViewBag.Bookings;
+}
+
+<link rel="stylesheet" href="~/css/Style.css" />
+
+<div class="main-wrapper">
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="success-msg">@TempData["Success"]</div>
+    }
+
+    <div class="profile-container">
+
+        <div class="profile-card">
+
+            <div class="profile-avatar">
+                @if (!string.IsNullOrEmpty(user.ProfileImage))
+                {
+                    <img src="@user.ProfileImage" class="profile-img" />
+                }
+                else
+                {
+                    <div class="avatar-letter">
+                        @user.Name?.Substring(0, 1).ToUpper()
+                    </div>
+                }
+            </div>
+
+            <h2>@user.Name</h2>
+            <p class="email">@user.Email</p>
+            <p class="phone"><b>Phone:</b> @user.Phone</p>
+
+            <!-- ACTION BUTTONS -->
+            <div class="profile-actions">
+                <button type="button" class="btn primary" onclick="toggleEdit()">Edit</button>
+                <button type="button" class="btn danger" onclick="confirmLogout()">Logout</button>
+            </div>
+
+            <!-- EDIT SECTION -->
+            <div id="editBox" class="edit-section">
+
+                <form asp-controller="Profile" asp-action="UpdateProfile"
+                      method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="Id" value="@user.Id" />
+                    <input type="text" name="Name" value="@user.Name" class="input" />
+                    <input type="text" name="Phone" value="@user.Phone" class="input" />
+
+                    <!-- FILE UPLOAD -->
+                    <div class="file-upload">
+                        <label for="fileInput" class="upload-btn">Upload Photo</label>
+                        <input type="file" id="fileInput" name="ImageFile" hidden onchange="previewImage(event)">
+                        <span id="fileName"></span>
+                    </div>
+
+                    <!-- SAVE BUTTON -->
+                    <button type="submit" class="btn primary full">Save</button>
+
+                </form>
+
+            </div>
+
+        </div>
+        <!-- RIGHT -->
+        <div class="booking-wrapper">
+
+            <h2 class="booking-title">Recent Bookings</h2>
+
+            <div class="booking-section">
+
+                @foreach (var b in bookings)
+                {
+                    <div class="booking-card">
+
+                        <h4>@b.PackageName</h4>
+
+                        <div class="booking-actions">
+                            <span class="status confirmed">Confirmed</span>
+
+                            <a asp-controller="Book"
+                                   asp-action="Invoice"
+                                   asp-route-id="@b.Id"
+                                   class="btn small primary">
+                                View
+                            </a>
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+        <script src="~/js/script.js" asp-append-version="true"></script>

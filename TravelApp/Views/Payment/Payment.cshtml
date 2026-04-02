@@ -1,0 +1,139 @@
+﻿@model TravelApp.Models.Booking
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<link rel="stylesheet" href="~/css/Payment.css" />
+
+<!-- 🔙 BACK BUTTON -->
+<form asp-controller="Book" asp-action="Summary" method="get">
+    <button type="submit" class="back-btn">← Back</button>
+</form>
+<div class="payment-wrapper">
+<!-- 💳 PAYMENT FORM -->
+<form id="confirmForm" asp-controller="Book" asp-action="Confirm" method="post">
+
+    <!-- 🔥 REQUIRED HIDDEN -->
+    <input type="hidden" asp-for="PaymentMethod" id="paymentMethod" />
+    <input type="hidden" asp-for="PaymentStatus" id="paymentStatus" />
+    <!-- 🔥 KEEP ALL DATA -->
+    <input type="hidden" asp-for="Name" />
+    <input type="hidden" asp-for="Mobile" />
+    <input type="hidden" asp-for="UserEmail" />
+    <input type="hidden" asp-for="PackageName" />
+    <input type="hidden" asp-for="Adults" />
+    <input type="hidden" asp-for="Children" />
+    <input type="hidden" asp-for="Members" />
+    <input type="hidden" asp-for="Price" />
+    <input type="hidden" id="finalAmountInput" name="TotalAmount" value="@Model.TotalAmount" />
+
+
+    @if (Model.Travellers != null)
+    {
+        for (int i = 0; i < Model.Travellers.Count; i++)
+        {
+            <input type="hidden" name="Travellers[@i].Name" value="@Model.Travellers[i].Name" />
+            <input type="hidden" name="Travellers[@i].Age" value="@Model.Travellers[i].Age" />
+            <input type="hidden" name="Travellers[@i].Gender" value="@Model.Travellers[i].Gender" />
+        }
+    }
+
+    <div class="payment-card">
+
+        <h2>Secure Payment</h2>
+            <div class="coupon-box">
+                <input type="text" id="couponInput" placeholder="Enter coupon code" />
+                <button type="button" id="applyCoupon">Apply</button>
+            </div>
+
+            <p>Discount: ₹<span id="discount">0</span></p>
+        <p>@Model.PackageName</p>
+            <h1>₹<span id="totalAmount">@Model.TotalAmount</span></h1>
+        <p>🔒 100% Secure Payment</p>
+
+        <!-- 🔘 PAYMENT OPTIONS -->
+        <div class="methods">
+            <label>
+                <input type="radio" name="method" value="UPI" checked onchange="switchMethod()"> UPI
+            </label>
+
+            <label>
+                <input type="radio" name="method" value="Card" onchange="switchMethod()"> Card
+            </label>
+
+            <label>
+                <input type="radio" name="method" value="NetBanking" onchange="switchMethod()"> Net Banking
+            </label>
+        </div>
+
+        <!-- 🔵 UPI SECTION -->
+        <div id="upiSection" class="method-section">
+            <h3>Scan & Pay</h3>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=questvoyage@upi&pn=QuestVoyage&am=@Model.TotalAmount"
+                 alt="UPI QR Code" />
+            <p>UPI ID: questvoyage@upi</p>
+        </div>
+
+        <!-- 💳 CARD SECTION -->
+        <div id="cardSection" class="method-section" style="display:none;">
+            <h3>Enter Card Details</h3>
+            <input type="text" placeholder="Card Number" />
+            <input type="text" placeholder="Card Holder Name" />
+            <input type="text" placeholder="MM/YY" />
+            <input type="password" placeholder="CVV" />
+        </div>
+
+        <!-- 🏦 NET BANKING -->
+        <div id="netSection" class="method-section" style="display:none;">
+            <h3>Bank Details</h3>
+            <p><strong>Account Name:</strong> QuestVoyage Pvt Ltd</p>
+            <p><strong>Account Number:</strong> 1234567890</p>
+            <p><strong>IFSC:</strong> SBIN0001234</p>
+            <p><strong>Bank:</strong> State Bank of India</p>
+        </div>
+
+        <!-- 💰 PAY BUTTON -->
+        <button type="button" onclick="startPayment()" class="pay-btn">
+                Pay ₹<span id="payAmount">@Model.TotalAmount</span>
+        </button>
+
+        <div id="loader" style="display:none;">
+            Processing...
+        </div>
+
+    </div>
+
+</form>
+    </div>
+<script>
+    function switchMethod() {
+        const method = document.querySelector('input[name="method"]:checked').value;
+
+        document.getElementById("upiSection").style.display = "none";
+        document.getElementById("cardSection").style.display = "none";
+        document.getElementById("netSection").style.display = "none";
+
+        document.getElementById("paymentMethod").value = method;
+
+        if (method === "UPI") {
+            document.getElementById("upiSection").style.display = "block";
+        } else if (method === "Card") {
+            document.getElementById("cardSection").style.display = "block";
+        } else {
+            document.getElementById("netSection").style.display = "block";
+        }
+    }
+
+    function startPayment() {
+        document.getElementById("loader").style.display = "block";
+
+        // simulate payment success
+        setTimeout(() => {
+            document.getElementById("paymentStatus").value = "Paid";
+            document.getElementById("confirmForm").submit();
+        }, 1500);
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/js/payment.js"></script>

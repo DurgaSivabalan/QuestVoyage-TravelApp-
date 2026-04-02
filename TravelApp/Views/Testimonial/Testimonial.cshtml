@@ -1,0 +1,64 @@
+﻿@model List<Review>
+
+<link rel="stylesheet" href="~/css/Testimonial.css" />
+<div class="review-page">
+
+    <div class="review-form-card">
+        <h2>Customer Reviews</h2>
+
+        <!-- FORM -->
+        <form method="post" asp-action="AddReview" asp-controller="Testimonial" class="review-form">
+            <input type="text" name="Name" placeholder="Your Name" required />
+            <textarea name="Comment" placeholder="Share your experience..." required></textarea>
+
+            <div class="star-rating">
+                <input type="radio" id="star5" name="Rating" value="5">
+                <label for="star5">★</label>
+
+                <input type="radio" id="star4" name="Rating" value="4">
+                <label for="star4">★</label>
+
+                <input type="radio" id="star3" name="Rating" value="3">
+                <label for="star3">★</label>
+
+                <input type="radio" id="star2" name="Rating" value="2">
+                <label for="star2">★</label>
+
+                <input type="radio" id="star1" name="Rating" value="1">
+                <label for="star1">★</label>
+            </div>
+            <button type="submit">Submit Review</button>
+        </form>
+
+
+        <!-- REVIEWS -->
+        <div class="review-list">
+            @foreach (var r in Model)
+            {
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="avatar">@r.Name.Substring(0, 1)</div>
+
+                        <div>
+                            <h4>@r.Name</h4>
+
+                            <div class="stars">
+                                @for (int i = 0; i < r.Rating; i++)
+                                {
+                                    <span>★</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="review-text">@r.Comment</p>
+                    <form asp-action="MarkHelpful" asp-controller="Testimonial" method="post">
+                        <input type="hidden" name="id" value="@r.Id" />
+                        <button type="submit">Helpful (@r.HelpfulCount)</button>
+                    </form>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

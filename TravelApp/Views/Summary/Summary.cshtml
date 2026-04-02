@@ -1,0 +1,93 @@
+﻿@model TravelApp.Models.Booking
+
+<link rel="stylesheet" href="~/css/summary.css" />
+
+<div class="top-bar">
+    <form asp-controller="Book" asp-action="Book" method="get">
+        <!-- SEND ALL DATA BACK -->
+
+        @for (int i = 0; i < Model.Travellers.Count; i++)
+        {
+            <input type="hidden" name="Travellers[@i].Name" value="@Model.Travellers[i].Name" />
+            <input type="hidden" name="Travellers[@i].Age" value="@Model.Travellers[i].Age" />
+            <input type="hidden" name="Travellers[@i].Gender" value="@Model.Travellers[i].Gender" />
+        }
+
+        <button type="submit" class="back-link">← Edit Details</button>
+    </form>
+</div>
+
+<div class="summary-card">
+
+    <h2>Booking Summary</h2>
+
+    <div class="info-row">
+        <span class="label">Booking ID</span>
+        <span class="value">Will be generated after payment</span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Package</span>
+        <span class="value">@Model.PackageName</span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Members</span>
+        <span class="value">@Model.Members</span>
+    </div>
+
+    <hr class="divider" />
+
+    <h3 class="section-title">Travellers</h3>
+
+    @{
+        var travellers = Model?.Travellers;
+    }
+
+    @if (travellers != null && travellers.Any())
+    {
+        foreach (var t in travellers)
+        {
+            <div class="traveller-item">
+                <p>@t.Name</p>
+                <p>@t.Age</p>
+                <p>@t.Gender</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="no-data">No traveller data available</p>
+    }
+
+    <hr class="divider" />
+
+    <div class="total-section">
+        <p class="total-label">Total Amount</p>
+        <h1 class="total-amount">₹@Model.TotalAmount</h1>
+    </div>
+
+    <form asp-action="Payment" method="get">
+        <input type="hidden" name="PackageId" value="@Model.PackageId" />
+        <input type="hidden" name="PackageName" value="@Model.PackageName" />
+        <input type="hidden" name="Price" value="@Model.Price" />
+        <input type="hidden" name="Members" value="@Model.Members" />
+        <input type="hidden" name="TotalAmount" value="@Model.TotalAmount" />
+        <input type="hidden" name="DepartureDate" value="@Model.DepartureDate" />  
+        <input type="hidden" name="UserEmail" value="@Model.UserEmail" />
+        <input type="hidden" name="Mobile" value="@Model.Mobile" />
+
+        @if (Model.Travellers != null)
+        {
+            for (int i = 0; i < Model.Travellers.Count; i++)
+            {
+                <input type="hidden" name="Travellers[@i].Name" value="@Model.Travellers[i].Name" />
+                <input type="hidden" name="Travellers[@i].Age" value="@Model.Travellers[i].Age" />
+                <input type="hidden" name="Travellers[@i].Gender" value="@Model.Travellers[i].Gender" />
+            }
+        }
+
+        <button type="submit" class="confirm-btn">Confirm Booking →</button>
+    </form>
+
+</div>
