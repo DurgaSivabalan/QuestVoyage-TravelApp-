@@ -1,77 +1,81 @@
 ﻿displayPackages(packages);
+
 function displayPackages(data) {
 
-    const container = document.getElementById("packageContainer");
-    container.innerHTML = "";
+    let container = document.getElementById("packageContainer");
 
-    data.forEach(pkg => {
+    if (data.length === 0) {
+        container.innerHTML = "<p>No packages found 😕</p>";
+        return;
+    }
 
-        let img = pkg.image
-            ? `<img src="data:image/jpeg;base64,${pkg.image}" />`
+    let html = "";
+
+    data.forEach(p => {
+
+        let img = p.image
+            ? `<img src="data:image/jpeg;base64,${p.image}" />`
             : `<div>No Image</div>`;
 
-        container.innerHTML += `
-        <div class="card">
+        html += `
+            <div class="card">
 
-            ${img}
+                ${img}
 
-            <h3>${pkg.name}</h3>
-            <p class="price">₹${pkg.price}</p>
-            <p>${pkg.type}</p>
-            <p>${pkg.duration} Days</p>
+                <h3>${p.name}</h3>
+                <p class="price">₹${p.price}</p>
+                <p>${p.type}</p>
+                <p>${p.duration} Days</p>
 
-            <div class="button-group">
-                <button onclick="addToWishlist(${pkg.id})">
-    Wishlist
-</button>
+                <div class="button-group">
+                    <button onclick="addToWishlist(${p.id})">
+                        Wishlist
+                    </button>
 
-                <button class="book-btn"
-                onclick="window.location.href='/Book/Book'">
-                    Book
-                </button>
+                    <button class="book-btn"
+                        onclick="window.location.href='/Book/Book'">
+                        Book
+                    </button>
+                </div>
+
             </div>
-
-        </div>`;
+        `;
     });
+
+    container.innerHTML = html;
 }
 function filterPackages() {
 
-    const price = document.getElementById("priceFilter").value;
-    const type = document.getElementById("typeFilter").value;
-    const duration = document.getElementById("durationFilter").value;
+    let price = document.getElementById("priceFilter").value;
+    let type = document.getElementById("typeFilter").value;
+    let duration = document.getElementById("durationFilter").value;
 
-    const filtered = packages.filter(pkg => {
+    let filtered = packages.filter(p => {
+        return (
+            (price === "all" ||
+                (price === "low" && p.price < 20000) ||
+                (price === "mid" && p.price >= 20000 && p.price <= 40000) ||
+                (price === "high" && p.price > 40000)) &&
 
-        let priceMatch =
-            price === "all" ||
-            (price === "low" && pkg.Price < 20000) ||
-            (price === "mid" && pkg.Price >= 20000 && pkg.Price <= 40000) ||
-            (price === "high" && pkg.Price > 40000);
+            (type === "all" || p.type === type) &&
 
-        let typeMatch =
-            type === "all" ||
-            pkg.Type.toLowerCase() === type.toLowerCase();
-
-        let durationMatch =
-            duration === "all" ||
-            (duration === "short" && pkg.Duration <= 2) ||
-            (duration === "medium" && pkg.Duration >= 3 && pkg.Duration <= 5) ||
-            (duration === "long" && pkg.Duration > 5);
-
-        return priceMatch && typeMatch && durationMatch;
+            (duration === "all" ||
+                (duration === "short" && p.duration <= 2) ||
+                (duration === "medium" && p.duration <= 5) ||
+                (duration === "long" && p.duration >= 6))
+        );
     });
 
     displayPackages(filtered);
 }
 
 function addToWishlist(id) {
-
     fetch('/Wishlist/Add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: `id=${id}` // ✅ IMPORTANT
+        body: `id=${id}`
     })
         .then(response => {
             if (response.status === 400) {
@@ -81,11 +85,8 @@ function addToWishlist(id) {
 
             if (response.ok) {
                 alert("Added to wishlist ✅");
-            }
-            else {
+            } else {
                 alert("Login first");
             }
         });
 }
-
-   

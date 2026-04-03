@@ -41,21 +41,7 @@ namespace TravelApp.Controllers
 
             return RedirectToAction("Index");
         }
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            var package = _context.Packages.Find(id);
-
-            if (package == null)
-            {
-                return Content("NOT FOUND: " + id);
-            }
-
-            _context.Packages.Remove(package);
-            _context.SaveChanges();
-
-            return Content("DELETED SUCCESS: " + id);
-        }
+       
         public IActionResult Index()
         {
             var data = _context.Packages.ToList();

@@ -37,11 +37,13 @@ h1 {
 }
 
 .card {
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: .3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* important */
+    padding: 15px;
+    border-radius: 12px;
+    background: #fff;
 }
 
     .card:hover {

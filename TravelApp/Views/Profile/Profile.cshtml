@@ -40,7 +40,7 @@
             </div>
 
             <!-- EDIT SECTION -->
-            <div id="editBox" class="edit-section">
+            <div id="editbox" class="edit-section">
 
                 <form asp-controller="Profile" asp-action="UpdateProfile"
                       method="post" enctype="multipart/form-data">
@@ -48,13 +48,7 @@
                     <input type="text" name="Name" value="@user.Name" class="input" />
                     <input type="text" name="Phone" value="@user.Phone" class="input" />
 
-                    <!-- FILE UPLOAD -->
-                    <div class="file-upload">
-                        <label for="fileInput" class="upload-btn">Upload Photo</label>
-                        <input type="file" id="fileInput" name="ImageFile" hidden onchange="previewImage(event)">
-                        <span id="fileName"></span>
-                    </div>
-
+                    
                     <!-- SAVE BUTTON -->
                     <button type="submit" class="btn primary full">Save</button>
 
@@ -94,5 +88,20 @@
 
         </div>
     </div>
+    <script>
+        function toggleEdit() {
+    var box = document.getElementById("editbox");
 
+    if (box.style.display === "none" || box.style.display === "") {
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+}
+function confirmLogout() {
+    if (confirm("Are you sure you want to logout?")) {
+        window.location.href = "/Account/Logout"; // adjust controller if needed
+    }
+}
+        </script>
         <script src="~/js/script.js" asp-append-version="true"></script>
