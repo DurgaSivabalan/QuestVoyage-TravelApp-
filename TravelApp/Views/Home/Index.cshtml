@@ -56,10 +56,7 @@
         <!-- RIGHT -->
         <div class="nav-right">
 
-            <a asp-controller="Book" asp-action="Book" class="book-btn">
-                Book Trip
-            </a>
-
+            
             <!-- ICONS -->
             <div class="icon-btn">
                 <a asp-controller="Wishlist" asp-action="Wishlist">
@@ -117,58 +114,85 @@
             Let us plan the journey you'll never forget."
         </h3>
 
-        <section class="explore">
-            <button>
-                <a asp-controller="Flights" asp-action="Flights">Explore More</a>
-            </button>
-        </section>
+        <!-- REPLACE WITH -->
+        <div style="display:flex; gap:16px; justify-content:center; margin-top:32px;">
+            <a asp-controller="Book" asp-action="Book" class="hero-btn-primary">Book Trip</a>
+            <a asp-controller="Packages" asp-action="Index" class="hero-btn-secondary">Explore More</a>
+        </div>
+
     </section>
 </section>
-    <section class="grid-section">
-      <h2>Our Popular Destinations</h2>
-      <div class="grid-container">
-        <div class="grid-item">
-    <img src="/images/paris.jpg" />
-    <h3>Paris</h3>
-    <p>Test visible</p>
-</div>
-        <div class="grid-item reveal">
-          <img src="~/images/tokyo.jpg" alt="Destination 2" />
-          <h3>Tokyo</h3>
-          <p>Discover modern culture and ancient traditions.</p>
-        </div>
-        <div class="grid-item reveal">
-          <img src="~/images/newyork.jpg" alt="Destination 3" />
-          <h3>New York</h3>
-          <p>The city that never sleeps awaits you.</p>
-        </div>
-        <div class="grid-item reveal">
-          <img src="~/images/london.jpg" alt="Destination 4" />
-          <h3>London</h3>
-          <p>Explore royal heritage and historic landmarks.</p>
-        </div>
-        <div class="grid-item reveal">
-          <img src="~/images/dubai.jpg" alt="Destination 5" />
-          <h3>Dubai</h3>
-          <p>Luxury and innovation combined.</p>
-        </div>
-        <div class="grid-item reveal">
-          <img src="~/images/singapore.jpg" alt="Destination 6" />
-          <h3>Singapore</h3>
-          <p>Modern city with vibrant culture.</p>
-        </div>
-        <div class="grid-item reveal">
-          <img src="~/images/barcelona.jpg" alt="Destination 7" />
-          <h3>Barcelona</h3>
-          <p>Art, architecture, and beach vibes.</p>
-        </div>
-        <div class="grid-item reveal">
-          <img src="~/images/sydney.jpg" alt="Destination 8" />
-          <h3>Sydney</h3>
-          <p>Beautiful beaches and iconic landmarks.</p>
-        </div>
-      </div>
-    </section>
+<!--Packages section-->
+<section class="packages-section">
+  <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px;">
+    <h2>Tour Packages</h2>
+    <p style="max-width:340px; font-size:0.88rem; color:#64748b; text-align:right; margin:0;">
+      Handpicked packages for every type of traveller — book your perfect trip today.
+    </p>
+  </div>
+
+  <div class="packages-container" id="pkgGrid">
+
+    <div class="package-item">
+      <img src="~/images/family.webp" alt="Family Package" />
+      <span class="pkg-pill">Family</span>
+      <span class="pkg-price">From ₹12,999</span>
+      <p>Kid-friendly stays, guided tours &amp; meals for everyone.</p>
+    </div>
+
+    <div class="package-item">
+      <img src="~/images/friends.webp" alt="Friends Tour" />
+      <span class="pkg-pill">Friends</span>
+      <span class="pkg-price">From ₹8,499</span>
+      <p>Group adventures, shared stays &amp; endless memories.</p>
+    </div>
+
+    <div class="package-item">
+      <img src="~/images/couple.webp" alt="Couples Tour" />
+      <span class="pkg-pill">Couples</span>
+      <span class="pkg-price">From ₹9,999</span>
+      <p>Romantic escapes with private dining &amp; scenic views.</p>
+    </div>
+
+    <div class="package-item">
+      <img src="~/images/honeymoon.webp" alt="Honeymoon" />
+      <span class="pkg-pill">Honeymoon</span>
+      <span class="pkg-price">From ₹18,999</span>
+      <p>Luxury resorts, candle-lit evenings &amp; beach sunsets.</p>
+    </div>
+
+    <div class="package-item">
+      <img src="~/images/corporate.webp" alt="Office Outing" />
+      <span class="pkg-pill">Corporate</span>
+      <span class="pkg-price">From ₹6,499</span>
+      <p>Team bonding trips with activities &amp; group discounts.</p>
+    </div>
+
+    <div class="package-item">
+      <img src="~/images/combo1.webp" alt="Combo Offer" />
+      <span class="pkg-pill">Combo</span>
+      <span class="pkg-price">From ₹14,999</span>
+      <p>Multi-destination bundles with flights, hotels &amp; tours.</p>
+    </div>
+
+    <div class="package-item">
+      <img src="~/images/solo.webp" alt="Solo Travel" />
+      <span class="pkg-pill">Solo</span>
+      <span class="pkg-price">From ₹4,999</span>
+      <p>Budget-friendly plans for the fearless solo traveller.</p>
+    </div>
+
+  </div>
+
+  <div class="packages-footer">
+    <button class="btn-pkg-more"
+      onclick="document.getElementById('pkgGrid').classList.toggle('expanded');
+               this.textContent = this.textContent.includes('more') ? 'View less' : 'View more';">
+      View more
+    </button>
+  </div>
+</section>
+
     <!-- WHY CHOOSE US -->
 <section class="why-us">
     <h2>Why Choose QuestVoyage?</h2>
@@ -198,31 +222,73 @@
 
 
 <!-- FEATURED PACKAGES -->
-<section class="featured">
-    <h2>Top Picks for You</h2>
+<section class="about-section">
+    <div class="about-inner">
 
-    <div class="featured-container">
-        <div class="featured-card">
-            <span class="badge">Best Seller</span>
-            <h3>Maldives Escape</h3>
-            <p>Luxury beach vacation with stunning views.</p>
+        <!-- Left: Text Content -->
+        <div class="about-text">
+            <h2>Who Are We?</h2>
+            <div class="about-underline"></div>
+            <p>
+                Founded in 2019, our travel agency began with a simple vision — to make travel
+                planning easy, reliable, and enjoyable for everyone. What started as a small team
+                with a passion for travel has grown into a trusted agency serving customers across
+                multiple cities.
+            </p>
+            <p>
+                We specialize in creating personalized travel experiences for families, couples,
+                friends, and corporate groups. Our services include flight bookings, hotel
+                reservations, tour packages, and complete travel assistance from start to finish.
+            </p>
+            <p>
+                With branch offices in major locations, we stay connected with our customers and
+                provide timely support. We believe in transparency, customer satisfaction, and
+                continuous improvement — turning travel dreams into memorable experiences.
+            </p>
+
+            <!-- Stats Row -->
+            <div class="about-stats">
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">10k+</span>
+                    <span class="stat-label">Happy Travellers</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Destinations</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Branch Offices</span>
+                </div>
+            </div>
         </div>
 
-        <div class="featured-card">
-            <span class="badge">Popular</span>
-            <h3>Swiss Alps Tour</h3>
-            <p>Experience breathtaking mountains and snow.</p>
+        <!-- Right: Image Grid -->
+        <div class="about-images">
+            <div class="about-img-main">
+                <img src="~/images/paris.jpg" alt="Travel" />
+            </div>
+            <div class="about-img-grid">
+                <img src="~/images/tokyo.jpg" alt="Tokyo" />
+                <img src="~/images/maldives.webp" alt="Maldives" />
+                <img src="~/images/kerala.webp" alt="Kerala" />
+                <div class="about-img-badge">
+                    <span>⭐</span>
+                    <strong>Since 2019</strong>
+                    <small>Trusted Agency</small>
+                </div>
+            </div>
         </div>
 
-        <div class="featured-card">
-            <span class="badge">Hot Deal</span>
-            <h3>Bali Retreat</h3>
-            <p>Relax in tropical paradise with cultural vibes.</p>
-        </div>
     </div>
 </section>
-
-
 <!-- TESTIMONIALS -->
 <section class="testimonials">
     <h2>What Our Travelers Say</h2>
@@ -247,11 +313,7 @@
 
 
 <!-- CALL TO ACTION -->
-<section class="cta">
-    <h2>Ready for Your Next Adventure?</h2>
-    <p>Explore amazing destinations and book your dream trip today.</p>
-    <a href="/Flights/Flights" class="cta-btn">Explore Now</a>
-</section>
+
   <section class="newsletter-section">
     <h2>Subscribe to Our Newsletter</h2>
     <p>
@@ -267,52 +329,69 @@
 
     <span class="note">No spam. Unsubscribe anytime.</span>
 </section>
-    <footer class="footer">
-      <section class="footer-container">
-        <section class="flex">
-          <h3>Branch Offices</h3>
-          <ul>
-            <li>Chennai</li>
-            <li>Bangalore</li>
-            <li>Kochi</li>
-            <li>Delhi</li>
-          </ul>
-        </section>
+<footer class="footer">
+   
+    <div class="footer-top">
 
-        <section class="flex">
-          <h3>Follow Us</h3>
-          <section class="socialmedia">
-            <a href="https://www.instagram.com">
-              <img
-                src="~/images/Insta.png" alt="insta"
-                style="width: 30px; height: 30px"
-              />Instagram</a
-            ><br />
-            <a href="https://www.facebook.com" 
-              ><img
-                src="~/images/Face.png" alt="face"
-                style="width: 30px; height: 30px"
-              />Facebook</a
-            ><br />
-            <a href="https://www.twitter.com" 
-              ><img
-                src="~/images/twitterss.png" alt="twitter"
-                style="width: 30px; height: 30px"
-              />Twitter</a
-            >
-          </section>
-        </section>
+        <!-- Column 1: Brand -->
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <img src="~/images/logo.jpg" alt="QuestVoyage" style="height:40px;" />
+                <span>QuestVoyage</span>
+            </div>
+            <p class="footer-tagline">
+                Your trusted travel partner for unforgettable journeys across the world.
+            </p>
+            <div class="footer-social">
+                <a href="https://www.instagram.com" class="social-btn">
+                    <img src="~/images/Insta.png" alt="Instagram" />
+                </a>
+                <a href="https://www.facebook.com" class="social-btn">
+                    <img src="~/images/Face.png" alt="Facebook" />
+                </a>
+                <a href="https://www.twitter.com" class="social-btn">
+                    <img src="~/images/twitterss.png" alt="Twitter" />
+                </a>
+            </div>
+        </div>
 
-        <section class="flex">
-          <h3>Contact</h3>
-          <p>📞 +91 98765 43210</p>
-          <p>✉️ support@travelagency.com</p>
-          <a href="https://maps.google.com"  style="text-decoration: none; color: black  ;">📍 View on Map</a>
-        </section>
-      </section>
+        <!-- Column 2: Branch Offices -->
+        <div class="footer-col">
+            <h4>Branch Offices</h4>
+            <ul>
+                <li>📍 Chennai</li>
+                <li>📍 Bangalore</li>
+                <li>📍 Kochi</li>
+                <li>📍 Delhi</li>
+            </ul>
+        </div>
 
-      <p class="footer-bottom">© 2026 Travel Agency. All Rights Reserved.</p>
-    </footer>
+        <!-- Column 3: Contact -->
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul class="footer-contact">
+                <li>📞 +91 98765 43210</li>
+                <li>✉️ support@questvoyage.com</li>
+                <li><a href="https://maps.google.com">📍 View on Map</a></li>
+            </ul>
+        </div>
+
+    </div>
+       
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+        <p>© 2026 QuestVoyage. All Rights Reserved.</p>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
 
     
 

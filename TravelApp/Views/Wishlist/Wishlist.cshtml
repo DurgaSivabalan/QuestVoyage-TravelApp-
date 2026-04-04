@@ -1,9 +1,23 @@
 ﻿@model List<TravelApp.Models.Package>
 
 <link rel="stylesheet" href="~/css/Wishlist.css" />
+
 <div class="wishlist-page">
+
+    <!-- Header -->
     <div class="wishlist-header">
-        <h1 class="wishlist-title">My Wishlist ❤️</h1>
+        <div class="wishlist-header-left">
+            <span class="wishlist-eyebrow">Your Collection</span>
+            <h1 class="wishlist-title">My Wishlist</h1>
+            <div class="wishlist-underline"></div>
+        </div>
+        @if (Model.Any())
+        {
+            <div class="wishlist-count-badge">
+                <span>❤️</span>
+                <strong>@Model.Count</strong> saved
+            </div>
+        }
     </div>
 
     @if (Model.Any())
@@ -12,37 +26,54 @@
             @foreach (var item in Model)
             {
                 <div class="wishlist-card" id="card-@item.Id">
+
+                    <!-- Image area -->
                     <div class="card-image">
                         @if (item.ImageData != null)
                         {
                             var base64 = Convert.ToBase64String(item.ImageData);
                             var imgSrc = $"data:image/jpeg;base64,{base64}";
-
-                            <img src="@imgSrc" alt="package" />
+                            <img src="@imgSrc" alt="@item.Name" />
                         }
-                        <button class="remove-btn" onclick="removeFromWishlist(@item.Id)">✕</button>
+
+                        <!-- Remove button -->
+                        <button class="remove-btn" onclick="removeFromWishlist(@item.Id)" title="Remove">
+                            ✕
+                        </button>
+
+                        <!-- Gradient overlay with name -->
                         <div class="card-overlay">
                             <h3>@item.Name</h3>
                         </div>
                     </div>
+
+                    <!-- Card body -->
                     <div class="card-body">
-                        <p>Experience comfort and unforgettable memories.</p>
+                        <p class="card-desc">Experience comfort and unforgettable memories.</p>
                         <div class="card-footer">
-                            <span class="card-price">₹@item.Price.ToString("N0")</span>
+                            <div class="card-price-wrap">
+                                <span class="card-price-label">Starting from</span>
+                                <span class="card-price">₹@item.Price.ToString("N0")</span>
+                            </div>
                             <a href="/Book/Book/@item.Id" class="book-btn">Book Now →</a>
                         </div>
                     </div>
+
                 </div>
             }
         </div>
     }
     else
     {
+        <!-- Empty state -->
         <div class="empty-state">
+            <div class="empty-icon">🗺️</div>
             <h2>Your wishlist is empty</h2>
-            <p>Start exploring and save your favorite destinations!</p>
+            <p>Start exploring and save your favourite destinations!</p>
+            <a href="/" class="explore-btn">Explore Destinations</a>
         </div>
     }
+
 </div>
 
 <script>
