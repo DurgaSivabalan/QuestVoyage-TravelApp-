@@ -36,6 +36,42 @@ body {
     overflow-y: auto;
 }
 
+    /* Animate hamburger → X when sidebar is open */
+    .sidebar.open ~ * .hamburger span:nth-child(1),
+    body.sidebar-open .hamburger span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+body.sidebar-open .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+body.sidebar-open .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Show hamburger on mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    /* hide heavy nav items on mobile */
+    .book-btn,
+    .icon-btn {
+        display: none;
+    }
+}
+
+/* Also ensure profile avatar stays on mobile */
+@media (max-width: 768px) {
+    .nav-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
     .sidebar.open {
         left: 0;
     }
@@ -339,8 +375,17 @@ header {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    padding: 4px;
+    padding: 8px;
+    background: #111827;
+    border-radius: 10px;
+    border: 1px solid #1e2a40;
+    transition: background 0.2s, border-color 0.2s;
 }
+
+    .hamburger:hover {
+        background: #1e2a40;
+        border-color: #e8613a;
+    }
 
     .hamburger span {
         display: block;
@@ -348,7 +393,7 @@ header {
         height: 2px;
         background: #c9d1dc;
         border-radius: 2px;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
     }
 
 /* mobile menu */
@@ -1273,5 +1318,421 @@ header {
     .featured-container,
     .testimonial-container {
         grid-template-columns: 1fr;
+    }
+}
+/* ============================================================
+   QuestVoyage — Profile Page
+   Theme: Dark navy + burnt orange, matching the Login/Register UI
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+    --bg-dark: #0d1117;
+    --panel-bg: #161c27;
+    --panel-surface: #1e2738;
+    --input-bg: #252f42;
+    --border-color: #2e3a50;
+    --orange: #e8541a;
+    --orange-hover: #c9450e;
+    --orange-glow: rgba(232, 84, 26, 0.25);
+    --text-primary: #f0f4ff;
+    --text-secondary: #8a97b0;
+    --text-muted: #5a6478;
+    --success-green: #22c55e;
+    --danger-red: #ef4444;
+    --confirmed-bg: rgba(34, 197, 94, 0.12);
+    --confirmed-text: #22c55e;
+    --radius-card: 18px;
+    --radius-input: 10px;
+    --radius-btn: 10px;
+    --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.5);
+    --transition: 0.22s ease;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* ── Main Wrapper ── */
+.main-wrapper {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 70% 10%, rgba(232, 84, 26, 0.08) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(30, 60, 120, 0.12) 0%, transparent 50%), var(--bg-dark);
+    padding: 40px 24px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Success Message ── */
+.success-msg {
+    width: 100%;
+    max-width: 980px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: var(--success-green);
+    padding: 14px 20px;
+    border-radius: var(--radius-input);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .success-msg::before {
+        content: '✓';
+        font-size: 1.1rem;
+    }
+
+/* ── Profile Container ── */
+.profile-container {
+    display: flex;
+    gap: 28px;
+    width: 100%;
+    max-width: 980px;
+    align-items: flex-start;
+}
+
+/* ── Profile Card (Left) ── */
+.profile-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+    padding: 36px 28px 32px;
+    width: 300px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-card);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: fadeSlideUp 0.4s ease both;
+}
+
+    .profile-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+/* ── Avatar ── */
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    border: 3px solid var(--orange);
+    box-shadow: 0 0 20px var(--orange-glow);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--input-bg);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-letter {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--orange);
+    line-height: 1;
+}
+
+/* ── Profile Info ── */
+.profile-card h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+}
+
+.email {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+
+.phone {
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+    .phone b {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+/* ── Action Buttons ── */
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+/* ── Buttons ── */
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    padding: 10px 22px;
+    transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .btn.primary {
+        background: var(--orange);
+        color: #fff;
+    }
+
+        .btn.primary:hover {
+            background: var(--orange-hover);
+            box-shadow: 0 4px 18px var(--orange-glow);
+            transform: translateY(-1px);
+        }
+
+    .btn.danger {
+        background: transparent;
+        color: var(--danger-red);
+        border: 1.5px solid rgba(239, 68, 68, 0.4);
+    }
+
+        .btn.danger:hover {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--danger-red);
+            transform: translateY(-1px);
+        }
+
+    .btn.full {
+        width: 100%;
+        padding: 13px;
+        font-size: 0.82rem;
+    }
+
+    .btn.small {
+        padding: 7px 16px;
+        font-size: 0.72rem;
+    }
+
+/* ── Edit Section ── */
+.edit-section {
+    display: none;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    animation: fadeSlideDown 0.25s ease both;
+}
+
+    .edit-section form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+/* ── Inputs ── */
+.input {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-input);
+    color: var(--text-primary);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.875rem;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+    .input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .input:focus {
+        border-color: var(--orange);
+        box-shadow: 0 0 0 3px var(--orange-glow);
+    }
+
+/* ── Booking Wrapper (Right) ── */
+.booking-wrapper {
+    flex: 1;
+    animation: fadeSlideUp 0.4s ease 0.1s both;
+}
+
+.booking-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+    letter-spacing: 0.01em;
+    position: relative;
+}
+
+    .booking-title::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 48px;
+        height: 2px;
+        background: var(--orange);
+        border-radius: 2px;
+    }
+
+/* ── Booking Section ── */
+.booking-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ── Booking Card ── */
+.booking-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+    .booking-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--orange);
+        border-radius: 3px 0 0 3px;
+        opacity: 0;
+        transition: opacity var(--transition);
+    }
+
+    .booking-card:hover {
+        border-color: rgba(232, 84, 26, 0.35);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+        .booking-card:hover::before {
+            opacity: 1;
+        }
+
+    .booking-card h4 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        letter-spacing: 0.01em;
+    }
+
+/* ── Booking Actions ── */
+.booking-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* ── Status Badge ── */
+.status.confirmed {
+    background: var(--confirmed-bg);
+    color: var(--confirmed-text);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+/* ── Animations ── */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .profile-card {
+        width: 100%;
+    }
+
+    .booking-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .booking-actions {
+        width: 100%;
+        justify-content: space-between;
     }
 }

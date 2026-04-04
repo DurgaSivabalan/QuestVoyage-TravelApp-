@@ -4,6 +4,7 @@ body {
     padding: 0;
     justify-content: center; /* center horizontally */
     align-items: center;
+    color:black;
     background: #f5f7fa !important; /* remove image */
     font-family: Arial, sans-serif;
 }

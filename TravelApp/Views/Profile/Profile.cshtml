@@ -45,18 +45,18 @@
                 <form asp-controller="Profile" asp-action="UpdateProfile"
                       method="post" enctype="multipart/form-data">
                     <input type="hidden" name="Id" value="@user.Id" />
-                    <input type="text" name="Name" value="@user.Name" class="input" />
-                    <input type="text" name="Phone" value="@user.Phone" class="input" />
+                    <input type="text" name="Name" value="@user.Name" class="input" placeholder="Full name" />
+                    <input type="text" name="Phone" value="@user.Phone" class="input" placeholder="Contact number" />
 
-                    
                     <!-- SAVE BUTTON -->
-                    <button type="submit" class="btn primary full">Save</button>
+                    <button type="submit" class="btn primary full">Save Changes</button>
 
                 </form>
 
             </div>
 
         </div>
+
         <!-- RIGHT -->
         <div class="booking-wrapper">
 
@@ -88,20 +88,22 @@
 
         </div>
     </div>
-    <script>
-        function toggleEdit() {
-    var box = document.getElementById("editbox");
 
-    if (box.style.display === "none" || box.style.display === "") {
-        box.style.display = "block";
-    } else {
-        box.style.display = "none";
-    }
-}
-function confirmLogout() {
-    if (confirm("Are you sure you want to logout?")) {
-        window.location.href = "/Account/Logout"; // adjust controller if needed
-    }
-}
-        </script>
-        <script src="~/js/script.js" asp-append-version="true"></script>
+    <script>
+            function toggleEdit() {
+                var box = document.getElementById("editbox");
+                if (box.style.display === "none" || box.style.display === "") {
+                    box.style.display = "block";
+                } else {
+                    box.style.display = "none";
+                }
+            }
+            function confirmLogout() {
+                if (confirm("Are you sure you want to logout?")) {
+                    window.location.href = "/Login/Logout";
+                }
+            }
+    </script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+
+</div>

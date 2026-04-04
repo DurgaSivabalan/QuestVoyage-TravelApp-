@@ -1,42 +1,262 @@
-﻿/* ============================================
-   LUXURY LIGHT THEME — Travel Contact Form
-   Ivory + Charcoal + Gold
-   ============================================ */
+﻿/* ============================================================
+   QuestVoyage — Contact / Support Form
+   Theme: Dark navy + burnt orange  (mirrors Profile & Auth UI)
+   ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
 
+/* ── CSS Variables ── */
+:root {
+    --bg-dark: #0d1117;
+    --panel-bg: #161c27;
+    --panel-surface: #1e2738;
+    --input-bg: #252f42;
+    --border-color: #2e3a50;
+    --orange: #e8541a;
+    --orange-hover: #c9450e;
+    --orange-glow: rgba(232, 84, 26, 0.25);
+    --text-primary: #f0f4ff;
+    --text-secondary: #8a97b0;
+    --text-muted: #5a6478;
+    --success-green: #22c55e;
+    --error-red: #ef4444;
+    --radius-card: 18px;
+    --radius-input: 10px;
+    --radius-btn: 10px;
+    --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.5);
+    --transition: 0.22s ease;
+}
+
+/* ── Reset ── */
 *, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #f7f4ef, #efe7dc);
-    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg-dark);
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* ── Contact Wrapper ── */
+.contact-wrapper {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    /* Subtle warm texture */
-    background-image: radial-gradient(ellipse at 20% 50%, rgba(196, 164, 106, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(196, 164, 106, 0.06) 0%, transparent 50%);
+    padding: 48px 20px;
+    background: radial-gradient(ellipse at 75% 10%, rgba(232, 84, 26, 0.08) 0%, transparent 55%), radial-gradient(ellipse at 20% 85%, rgba(30, 60, 120, 0.1) 0%, transparent 50%), var(--bg-dark);
 }
 
-/* ---------- Card ---------- */
+/* ── Contact Container (Card) ── */
 .contact-container {
-    position: relative;
-    background: #ffffff;
-    border: 1px solid rgba(196, 164, 106, 0.2);
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 20px 60px rgba(44, 36, 22, 0.08);
-    max-width: 600px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+    padding: 48px 44px 44px;
     width: 100%;
-    padding: 3.5rem 3rem;
-    animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 620px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    animation: fadeSlideUp 0.4s ease both;
 }
 
-@keyframes cardIn {
+    /* orange top accent line */
+    .contact-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+    /* ── Headings ── */
+    .contact-container h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+        letter-spacing: 0.01em;
+    }
+
+.subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+/* ── Form Layout ── */
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+    /* ── Labels ── */
+    .form-group label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+    }
+
+    /* ── Inputs ── */
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+        background: var(--input-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-input);
+        color: var(--text-primary);
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.875rem;
+        padding: 12px 16px;
+        outline: none;
+        transition: border-color var(--transition), box-shadow var(--transition);
+        width: 100%;
+    }
+
+    .form-group input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .form-group input:focus {
+        border-color: var(--orange);
+        box-shadow: 0 0 0 3px var(--orange-glow);
+    }
+
+/* ── Enquiry Section ── */
+.enquiry-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+    .enquiry-section > p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+    }
+
+/* ── Radio Group ── */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        cursor: pointer;
+    }
+
+    /* Hide the native radio */
+    .radio-group input[type="radio"] {
+        display: none;
+    }
+
+    /* Style the label text as a pill */
+    .radio-group label {
+        background: var(--input-bg);
+        border: 1.5px solid var(--border-color);
+        border-radius: 30px;
+        padding: 8px 18px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--text-secondary);
+        transition: border-color var(--transition), color var(--transition), background var(--transition), box-shadow var(--transition);
+        user-select: none;
+    }
+
+        .radio-group label:hover {
+            border-color: rgba(232, 84, 26, 0.5);
+            color: var(--text-primary);
+        }
+
+        /* Selected pill — toggled by tiny inline JS */
+        .radio-group label.selected {
+            background: rgba(232, 84, 26, 0.12);
+            border-color: var(--orange);
+            color: var(--orange);
+            box-shadow: 0 0 0 3px var(--orange-glow);
+        }
+
+/* ── Submit Button ── */
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-btn);
+    padding: 14px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+    .btn:hover {
+        background: var(--orange-hover);
+        box-shadow: 0 4px 20px var(--orange-glow);
+        transform: translateY(-1px);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+/* ── Feedback Messages ── */
+#successMessage {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--success-green);
+    text-align: center;
+    min-height: 20px;
+    padding: 4px 0;
+}
+
+#errorMessage {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--error-red);
+    text-align: center;
+    min-height: 20px;
+    padding: 4px 0;
+}
+
+/* ── Animation ── */
+@keyframes fadeSlideUp {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -48,302 +268,17 @@ body {
     }
 }
 
-/* Gold top accent */
-.contact-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 3rem;
-    right: 3rem;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #c4a46a, #d4b97a, #c4a46a, transparent);
-    border-radius: 2px;
-}
-
-/* ---------- Heading ---------- */
-.contact-container h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: 2.4rem;
-    text-align: center;
-    color: #1e1e1e;
-    letter-spacing: 0.01em;
-    margin-bottom: 0.3rem;
-}
-
-.contact-container > p,
-.contact-container .subtitle {
-    text-align: center;
-    color: #8a8278;
-    font-size: 0.92rem;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    margin-bottom: 2.5rem;
-}
-
-    /* Decorative gold divider */
-    .contact-container > p::after,
-    .contact-container .subtitle::after {
-        content: '✦';
-        display: block;
-        color: #c4a46a;
-        font-size: 0.7rem;
-        margin-top: 1.2rem;
-        letter-spacing: 0.5em;
-    }
-
-/* ---------- Form Grid ---------- */
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-    /* ---------- Labels ---------- */
-    .form-group label {
-        display: block;
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: #9a9084;
-        margin-bottom: 0.5rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-    }
-
-    /* ---------- Inputs ---------- */
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group input[type="tel"],
-    .form-group input[type="number"],
-    .form-group textarea,
-    .form-group select {
-        width: 100%;
-        padding: 0.85rem 1.1rem;
-        border: 1px solid #e5ddd2;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 400;
-        color: #2c2418;
-        background: #faf8f5;
-        transition: all 0.3s ease;
-        outline: none;
-    }
-
-        .form-group input:hover,
-        .form-group textarea:hover {
-            border-color: #d4c4a8;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: #c4a46a;
-            background: #fffdf9;
-            box-shadow: 0 0 0 3px rgba(196, 164, 106, 0.12);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: #c0b8ac;
-            font-weight: 300;
-        }
-
-/* ---------- Enquiry Type ---------- */
-.enquiry-section {
-    margin-bottom: 1.75rem;
-}
-
-    .enquiry-section h4,
-    .enquiry-section > label,
-    .enquiry-section > p {
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: #9a9084;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        margin-bottom: 0.85rem;
-    }
-
-.radio-group {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-}
-
-    .radio-group label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.6rem 1.2rem;
-        border: 1px solid #e5ddd2;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 0.88rem;
-        font-weight: 400;
-        color: #7a7064;
-        background: #faf8f5;
-        transition: all 0.25s ease;
-        user-select: none;
-        text-transform: none;
-        letter-spacing: normal;
-        margin-bottom: 0;
-    }
-
-        .radio-group label:hover {
-            border-color: #c4a46a;
-            color: #4a4030;
-            background: #fdf8f0;
-        }
-
-    /* Custom radio */
-    .radio-group input[type="radio"] {
-        appearance: none;
-        -webkit-appearance: none;
-        width: 16px;
-        height: 16px;
-        border: 1.5px solid #c8bfb2;
-        border-radius: 50%;
-        margin: 0;
-        transition: all 0.2s ease;
-        position: relative;
-        flex-shrink: 0;
-    }
-
-        .radio-group input[type="radio"]:checked {
-            border-color: #c4a46a;
-        }
-
-            .radio-group input[type="radio"]:checked::after {
-                content: '';
-                position: absolute;
-                top: 3px;
-                left: 3px;
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: #c4a46a;
-            }
-
-    .radio-group label:has(input:checked) {
-        border-color: #c4a46a;
-        background: #faf3e6;
-        color: #2c2418;
-        font-weight: 500;
-    }
-
-/* ---------- Submit Button ---------- */
-.btn-submit,
-button[type="submit"],
-input[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    background: linear-gradient(135deg, #2c2418, #3d3226);
-    box-shadow: 0 4px 16px rgba(44, 36, 24, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    transition: all 0.35s ease;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.5rem;
-    position: relative;
-    overflow: hidden;
-}
-
-    /* Gold shimmer on hover */
-    .btn-submit::after,
-    button[type="submit"]::after,
-    input[type="submit"]::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(196, 164, 106, 0.2), transparent);
-        transition: left 0.5s ease;
-    }
-
-    .btn-submit:hover,
-    button[type="submit"]:hover,
-    input[type="submit"]:hover {
-        background: linear-gradient(135deg, #3d3226, #4a3c2e);
-        box-shadow: 0 8px 28px rgba(44, 36, 24, 0.28);
-        transform: translateY(-2px);
-    }
-
-        .btn-submit:hover::after,
-        button[type="submit"]:hover::after {
-            left: 120%;
-        }
-
-    .btn-submit:active,
-    button[type="submit"]:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(44, 36, 24, 0.2);
-    }
-
-/* ---------- Validation (ASP.NET) ---------- */
-.text-danger,
-.field-validation-error {
-    color: #c0392b;
-    font-size: 0.78rem;
-    margin-top: 0.3rem;
-}
-
-.input-validation-error {
-    border-color: #c0392b !important;
-    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08) !important;
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 540px) {
-    body {
-        padding: 1rem;
-    }
-
+/* ── Responsive ── */
+@media (max-width: 560px) {
     .contact-container {
-        padding: 2.5rem 1.5rem;
-        border-radius: 16px;
+        padding: 36px 22px 32px;
     }
-
-        .contact-container::before {
-            left: 1.5rem;
-            right: 1.5rem;
-        }
 
     .form-row {
         grid-template-columns: 1fr;
-        gap: 0;
-        margin-bottom: 0;
-    }
-
-    .form-group {
-        margin-bottom: 1.25rem;
     }
 
     .radio-group {
-        flex-direction: column;
-    }
-
-    .contact-container h2 {
-        font-size: 1.8rem;
+        gap: 8px;
     }
 }

@@ -1,69 +1,72 @@
 ﻿@{
     ViewData["Title"] = "Contact Form";
-    
 }
-    <link rel="stylesheet" href="~/css/Form.css">
-    @{
-        ViewData["Title"] = "Contact Form";
-    
-    }
-    <link rel="stylesheet" href="~/css/Form.css">
-    
-        <section class="contact-wrapper">
+<link rel="stylesheet" href="~/css/Form.css">
 
-            <div class="contact-container">
+    <section class="contact-wrapper">
 
-                <h2>Contact Support</h2>
-                <p class="subtitle">We’ll help you with bookings & queries</p>
+        <div class="contact-container">
 
-                <form id="contactForm">
+            <h2>Contact Support</h2>
+            <p class="subtitle">We'll help you with bookings &amp; queries</p>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" name="FirstName" required>
-                        </div>
+            <form id="contactForm">
 
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" name="LastName" required>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="FirstName" required placeholder="John">
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="Email" required>
-                        </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="LastName" required placeholder="Doe">
+                    </div>
+                </div>
 
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="text" name="Phone" required>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="Email" required placeholder="you@email.com">
                     </div>
 
-                    <div class="enquiry-section">
-                        <p>Enquiry Type</p>
-
-                        <div class="radio-group">
-                            <label><input type="radio" name="EnquiryType" value="Flight Booking"> Flight</label>
-                            <label><input type="radio" name="EnquiryType" value="Hotel Booking"> Hotel</label>
-                            <label><input type="radio" name="EnquiryType" value="Package Booking"> Package</label>
-                            <label><input type="radio" name="EnquiryType" value="Place Booking"> Place</label>
-                        </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" name="Phone" required placeholder="+91 00000 00000">
                     </div>
+                </div>
 
-                    <button type="submit" class="btn">Send Message</button>
-                    <p id="successMessage"></p>
-                    <p id="errorMessage"></p>
-                </form>
+                <div class="enquiry-section">
+                    <p>Enquiry Type</p>
 
-            </div>
+                    <div class="radio-group">
+                        <label><input type="radio" name="EnquiryType" value="Flight Booking"> Flight</label>
+                        <label><input type="radio" name="EnquiryType" value="Hotel Booking"> Hotel</label>
+                        <label><input type="radio" name="EnquiryType" value="Package Booking"> Package</label>
+                        <label><input type="radio" name="EnquiryType" value="Place Booking"> Place</label>
+                    </div>
+                </div>
 
-        </section>
+                <button type="submit" class="btn">Send Message</button>
+                <p id="successMessage"></p>
+                <p id="errorMessage"></p>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- Radio pill highlight (pure UI — no logic change) -->
+    <script>
+        document.querySelectorAll('.radio-group input[type="radio"]').forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                document.querySelectorAll('.radio-group label').forEach(function (lbl) {
+                    lbl.classList.remove('selected');
+                });
+                radio.closest('label').classList.add('selected');
+            });
+        });
+    </script>
+
 <script src="~/js/form.js"></script>
- 
-<script src="~/js/form.js"></script>
-
-
- 
