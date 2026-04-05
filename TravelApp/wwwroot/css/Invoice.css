@@ -1,85 +1,246 @@
-﻿
+﻿/* ===== Page ===== */
 body {
-    font-family: Arial;
-    background: #f5f5f5;
-    color:black;
+    background-color: #0d1117;
+    font-family: 'DM Sans', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
+main {
+    padding-top: 0 !important;
+}
+
+/* ===== Invoice Box ===== */
 .invoice-box {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border: 1px solid #eee;
+    max-width: 680px;
+    margin: 30px auto 24px;
+    background-color: #161d2e;
+    border-radius: 16px;
+    border: 1px solid #2e3a50;
+    padding: 40px 44px;
 }
 
+/* ===== Header Row ===== */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
 }
 
 .logo {
-    width: 120px;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
 }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-.total {
-    text-align: right;
-    font-size: 18px;
-    margin-top: 20px;
-}
-
-.print-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-/* 🔥 PRINT STYLING */
-@media print {
-    body {
-        background: white;
-    }
-
-    .print-btn {
-        display: none; /* hide button in print */
-    }
-
-    .invoice-box {
-        border: none;
-        box-shadow: none;
-    }
-}
-.home-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #10b981;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-}
-
-
-
 
 .title {
     text-align: right;
 }
 
+    .title h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 4px 0;
+    }
 
+    .title p {
+        font-size: 0.78rem;
+        color: #64748b;
+        margin: 0;
+    }
 
+/* ===== Divider ===== */
+hr {
+    border: none;
+    border-top: 1px solid #2e3a50;
+    margin: 20px 0;
+}
+
+/* ===== Section Headings ===== */
+h3 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #ff6b35;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 24px 0 12px 0;
+}
+
+    /* Orange left border accent on h3 */
+    h3::before {
+        content: '';
+        display: inline-block;
+        height: 12px;
+        background-color: #ff6b35;
+        vertical-align: middle;
+    }
+
+/* ===== Info Paragraphs ===== */
+p {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    margin: 0 0 8px 0;
+    line-height: 1.6;
+}
+
+    p b {
+        color: #e2e8f0;
+        font-weight: 600;
+    }
+
+/* ===== Travellers Table ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.85rem;
+}
+
+th {
+    background-color: #1a2540;
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid #2e3a50;
+}
+
+    th:first-child {
+        border-radius: 8px 0 0 0;
+    }
+
+    th:last-child {
+        border-radius: 0 8px 0 0;
+    }
+
+td {
+    padding: 10px 14px;
+    color: #cbd5e1;
+    border-bottom: 1px solid #1f2d42;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #1a2540;
+}
+
+/* ===== Total Section ===== */
+.total {
+    background-color: #1a2540;
+    border-radius: 12px;
+    border: 1px solid #2e3a50;
+    padding: 18px 22px;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .total b {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ff6b35;
+    }
+
+/* ===== Print Button ===== */
+.print-btn {
+    display: block;
+    width: 100%;
+    background-color: #ff6b35;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-sizing: border-box;
+}
+
+    .print-btn:hover {
+        background-color: #e55a28;
+        transform: translateY(-2px);
+    }
+
+/* ===== Go to Home Link ===== */
+.home-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid #2e3a50;
+    color: #94a3b8;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    margin-bottom: 48px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+    .home-btn:hover {
+        border-color: #ff6b35;
+        color: #ff6b35;
+    }
+
+/* ===== Print Mode — clean white output ===== */
+@media print {
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .invoice-box {
+        background-color: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 24px !important;
+    }
+
+    .title h2, h3, p b, .total b {
+        color: #000000 !important;
+    }
+
+    p, td, th {
+        color: #333333 !important;
+    }
+
+    h3::before {
+        background-color: #ff6b35 !important;
+    }
+
+    .print-btn,
+    .home-btn {
+        display: none !important;
+    }
+
+    hr {
+        border-top: 1px solid #cccccc !important;
+    }
+
+    th {
+        background-color: #f5f5f5 !important;
+        color: #333333 !important;
+    }
+
+    .total {
+        background-color: #fff8f5 !important;
+        border: 1px solid #ffccb3 !important;
+    }
+}

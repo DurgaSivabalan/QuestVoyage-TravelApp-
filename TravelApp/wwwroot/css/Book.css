@@ -1,228 +1,188 @@
-﻿/* PAGE */
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ===== Page ===== */
 body {
-    background: #f4f7fb;
-    font-family: 'Segoe UI', sans-serif;
+    background-color: #0d1117;
+    font-family: 'DM Sans', sans-serif;
+    color: #ffffff;
     margin: 0;
+    padding: 0;
 }
 
-/* TITLE */
+main {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* ===== Heading ===== */
 h1 {
     text-align: center;
-    margin: 25px 0;
-    font-weight: 600;
-    color: #2c3e50;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    color: #ffffff;
+    padding-top: 20px;
+    margin: 0 0 6px 0;
 }
 
-/* FORM CARD */
+    h1::after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 3px;
+        background-color: #ff6b35;
+        margin: 10px auto 0;
+        border-radius: 2px;
+    }
+
+/* ===== Form Container ===== */
 .form-container {
-    max-width: 900px;
-    margin: auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 860px;
+    margin: 36px auto 60px;
+    background-color: #161d2e;
+    border-radius: 16px;
+    border: 1px solid #2e3a50;
+    padding: 36px 40px;
 }
 
-/* GRID */
+/* ===== 2-column grid for inputs ===== */
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 28px;
+    margin-bottom: 24px;
 }
 
-/* LABEL */
-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 6px;
-    display: block;
-}
+    /* ===== Labels ===== */
+    .form-grid label,
+    label {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
 
-/* INPUTS */
-input, select, textarea {
-    width: 100%;
-    padding: 11px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background: #fafafa;
-    font-size: 14px;
-    transition: all 0.2s ease;
-}
-
-    /* FOCUS EFFECT */
-    input:focus, select:focus, textarea:focus {
-        border-color: #4a6cf7;
-        background: #fff;
+    /* ===== Inputs, Selects, Textarea ===== */
+    .form-grid input,
+    .form-grid select,
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+        width: 100%;
+        background-color: #1c2b3a;
+        border: 1px solid #2e3a50;
+        border-radius: 8px;
+        padding: 11px 14px;
+        font-size: 0.88rem;
+        color: #e2e8f0;
+        font-family: 'DM Sans', sans-serif;
         outline: none;
-        box-shadow: 0 0 6px rgba(74,108,247,0.25);
+        box-sizing: border-box;
+        transition: border-color 0.2s ease;
     }
 
-/* PRICE BOX */
-.form-grid p {
-    background: #eef2ff;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    color: #4a6cf7;
-    text-align: center;
-    margin: 0;
-}
-
-/* BUTTON BASE */
-.btn {
-    margin-top: 18px;
-    padding: 12px;
-    width: 100%;
-    border-radius: 8px;
-    border: none;
-    background: #e5e7eb;
-    cursor: pointer;
-    font-weight: 500;
-    transition: 0.2s;
-}
-
-    /* PRIMARY BUTTON */
-    .btn.primary {
-        background: linear-gradient(to right, #4a6cf7, #6a8cff);
-        color: white;
-    }
-
-        .btn.primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(74,108,247,0.3);
+        .form-grid input:focus,
+        .form-grid select:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
         }
 
-/* ADD TRAVELLER BUTTON */
-#addTravellersBtn {
-    background: #f1f3f7;
-}
+        /* Date input color fix */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.5;
+            cursor: pointer;
+        }
 
-/* TRAVELLER BOX */
-#travellersContainer > div {
-    background: #f7f9ff;
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 12px;
-    border: 1px solid #e3e8ff;
-}
-
-/* TEXTAREA */
+/* ===== Textarea ===== */
 textarea {
-    margin-top: 10px;
-    resize: none;
-}
-
-/* ERROR */
-#dateError {
-    font-size: 12px;
-    margin-top: 3px;
-}
-
-/* MOBILE */
-@media(max-width: 768px) {
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-}
-/* TOTAL BOX */
-/* TOTAL AMOUNT BOX */
-.total-box {
-    margin-top: 20px;
-    padding: 18px;
-    border-radius: 12px;
-    background: linear-gradient(to right, #eef2ff, #f5f7ff);
-    text-align: center; /* 🔥 CENTER FIX */
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    border: 1px solid #e0e6ff;
-}
-
-    /* AMOUNT STYLE */
-    .total-box strong {
-        display: block;
-        margin-top: 5px;
-        font-size: 24px;
-        color: cornflowerblue;
-    }
-
-/* TRAVELLER SECTION TITLE */
-#addTravellersBtn {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-/* TRAVELLER CARD */
-#travellersContainer > div {
-    background: #ffffff;
-    padding: 18px;
-    border-radius: 12px;
-    margin-top: 18px;
-    border: 1px solid #e4e9f7;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-/* TRAVELLER TITLE */
-#travellersContainer h3 {
-    margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-/* INPUTS INSIDE TRAVELLER */
-#travellersContainer input,
-#travellersContainer select {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-/* HOVER EFFECT */
-#travellersContainer > div:hover {
-    transform: translateY(-2px);
-    transition: 0.2s;
-}
-
-/* TRAVELLER TITLE */
-#travellersContainer h3 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-/* INPUT SPACING INSIDE TRAVELLER */
-#travellersContainer input,
-#travellersContainer select {
-    margin-bottom: 10px;
-}
-
-/* BETTER TEXTAREA SPACE */
-textarea {
-    margin-top: 15px;
-}
-
-/* SUBMIT BUTTON SEPARATION */
-.btn.primary {
-    margin-top: 15px;
-}
-/* SUMMARY BUTTON */
-.summary-btn {
     width: 100%;
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    background: linear-gradient(to right, #4a6cf7, #6a8cff);
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: 0.2s;
+    min-height: 100px;
+    resize: vertical;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
-    /* HOVER */
-    .summary-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(74,108,247,0.3);
+/* ===== Add Traveller Button ===== */
+.btn {
+    background-color: transparent;
+    color: #ff6b35;
+    border: 1px solid #ff6b35;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .btn:hover {
+        background-color: #ff6b35;
+        color: #ffffff;
     }
+
+/* ===== Traveller Box ===== */
+.traveller-box {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 14px 16px;
+    background-color: #1a2540;
+    border-radius: 10px;
+    border: 1px solid #2e3a50;
+    flex-wrap: wrap;
+}
+
+    .traveller-box input,
+    .traveller-box select {
+        flex: 1;
+        min-width: 120px;
+        background-color: #1c2b3a;
+        border: 1px solid #2e3a50;
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-size: 0.85rem;
+        color: #e2e8f0;
+        font-family: 'DM Sans', sans-serif;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+        .traveller-box input:focus,
+        .traveller-box select:focus {
+            border-color: #ff6b35;
+        }
+
+/* ===== Submit Button ===== */
+.summary-btn {
+    display: block;
+    width: 100%;
+    background-color: #ff6b35;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+    .summary-btn:hover {
+        background-color: #e55a28;
+        transform: translateY(-2px);
+    }
+    

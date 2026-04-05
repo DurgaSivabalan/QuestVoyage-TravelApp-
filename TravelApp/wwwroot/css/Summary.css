@@ -1,160 +1,199 @@
-﻿* {
+﻿
+/* ===== Page ===== */
+body {
+    background-color: #0d1117;
+    font-family: 'DM Sans', sans-serif;
+    color: #ffffff;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body {
-    background: #f1f5f9;
-    font-family: 'Segoe UI', sans-serif;
-    min-height: 100vh;
-    padding: 40px 20px;
+main {
+    padding-top: 0 !important;
 }
 
+/* ===== Top Bar (Back button) ===== */
 .top-bar {
-    max-width: 580px;
-    margin: 0 auto 20px;
-    display: flex;
-    justify-content: flex-end;
+    max-width: 680px;
+    margin: 24px auto 0;
+    padding: 0 20px;
 }
 
 .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #2563eb;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid #2e3a50;
+    color: #94a3b8;
     border-radius: 8px;
-    border: 1px solid #dbeafe;
-    background: white;
-    transition: all 0.2s;
+    padding: 9px 18px;
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
     .back-link:hover {
-        background: #eff6ff;
-        border-color: #93c5fd;
+        border-color: #ff6b35;
+        color: #ff6b35;
     }
 
+/* ===== Summary Card ===== */
 .summary-card {
-    max-width: 580px;
-    margin: 0 auto;
-    background: white;
+    max-width: 680px;
+    margin: 20px auto 60px;
+    background-color: #161d2e;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    padding: 36px 32px;
+    border: 1px solid #2e3a50;
+    padding: 36px 40px;
 }
 
+    /* ===== Heading ===== */
     .summary-card h2 {
-        font-size: 26px;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.8rem;
         font-weight: 700;
-        color: #0f172a;
-        text-align: center;
-        margin-bottom: 28px;
+        color: #ffffff;
+        margin: 0 0 6px 0;
     }
 
+        .summary-card h2::after {
+            content: '';
+            display: block;
+            width: 44px;
+            height: 3px;
+            background-color: #ff6b35;
+            border-radius: 2px;
+            margin-top: 10px;
+            margin-bottom: 28px;
+        }
+
+/* ===== Info Rows ===== */
 .info-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    font-size: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #1f2d42;
 }
 
-    .info-row .label {
-        color: #64748b;
+    .info-row:last-of-type {
+        border-bottom: none;
     }
 
-    .info-row .value {
-        font-weight: 600;
-        color: #0f172a;
-    }
+.label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
 
+.value {
+    font-size: 0.88rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* ===== Divider ===== */
 .divider {
     border: none;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid #2e3a50;
     margin: 20px 0;
 }
 
+/* ===== Section Title ===== */
 .section-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 16px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 14px 0;
 }
 
+/* ===== Traveller Items ===== */
 .traveller-item {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    display: flex;
+    gap: 0;
+    justify-content: space-between;
+    background-color: #1a2540;
     border-radius: 10px;
-    padding: 14px 18px;
+    border: 1px solid #2e3a50;
+    padding: 12px 18px;
     margin-bottom: 10px;
 }
 
     .traveller-item p {
-        font-size: 14px;
-        color: #334155;
-        margin-bottom: 4px;
+        margin: 0;
+        font-size: 0.85rem;
+        color: #cbd5e1;
+        flex: 1;
     }
 
-        .traveller-item p:last-child {
-            margin-bottom: 0;
+        .traveller-item p:first-child {
+            font-weight: 600;
+            color: #ffffff;
         }
 
-.total-section {
+        .traveller-item p:last-child {
+            text-align: right;
+            color: #64748b;
+        }
+
+/* ===== No data ===== */
+.no-data {
+    font-size: 0.82rem;
+    color: #475569;
     text-align: center;
-    margin-top: 24px;
+    padding: 12px 0;
 }
 
-    .total-section .total-label {
-        font-size: 14px;
-        color: #94a3b8;
-        margin-bottom: 4px;
-    }
+/* ===== Total Section ===== */
+.total-section {
+    background-color: #1a2540;
+    border-radius: 12px;
+    border: 1px solid #2e3a50;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
 
-    .total-section .total-amount {
-        font-size: 36px;
-        font-weight: 700;
-        color: #2563eb;
-    }
+.total-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
 
+.total-amount {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ff6b35;
+    margin: 0;
+}
+
+/* ===== Confirm Button ===== */
 .confirm-btn {
     display: block;
     width: 100%;
-    padding: 14px;
-    margin-top: 24px;
-    background: #2563eb;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
+    background-color: #ff6b35;
+    color: #ffffff;
     border: none;
     border-radius: 10px;
+    padding: 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-sizing: border-box;
 }
 
     .confirm-btn:hover {
-        background: #1d4ed8;
+        background-color: #e55a28;
+        transform: translateY(-2px);
     }
-
-.no-data {
-    color: #94a3b8;
-    font-size: 14px;
-    font-style: italic;
-}
-
-@media (max-width: 600px) {
-    .summary-card {
-        padding: 24px 18px;
-    }
-
-        .summary-card h2 {
-            font-size: 22px;
-        }
-
-    .total-section .total-amount {
-        font-size: 28px;
-    }
-}

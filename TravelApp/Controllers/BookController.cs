@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TravelApp.Models;
 using Newtonsoft.Json;
-
+//Dependency Injection for DB Context
 public class BookController : Controller
 {
     private readonly AppDbContext _context;
@@ -11,6 +11,8 @@ public class BookController : Controller
     {
         _context = context;
     }
+
+    //Model Binding for Booking form
     [HttpPost]
     public IActionResult Book(Booking booking)
     {
@@ -26,6 +28,7 @@ public class BookController : Controller
 
         return RedirectToAction("Summary");
     }
+    //Delete Booking {Delete booking based on id and user}
     [HttpPost]
     public IActionResult DeleteBooking(int id)
     {
@@ -48,7 +51,7 @@ public class BookController : Controller
     {
         var data = HttpContext.Session.GetString("BookingData");
 
-        // 🔥 ADD THIS (IMPORTANT)
+        // Send Packages list to View
         ViewBag.Packages = _context.Packages.ToList();
 
         if (data != null)
@@ -60,7 +63,7 @@ public class BookController : Controller
         return View(new Booking());
     }
 
-    // STEP 1 → SUMMARY
+    // STEP 1 → SUMMARY{Showing Summary}
     [HttpGet]
     public IActionResult Summary()
     {
@@ -85,7 +88,7 @@ public class BookController : Controller
         }
 
         // DEBUG
-        Console.WriteLine("Traveller count: " + booking.Travellers.Count);
+        //Console.WriteLine("Traveller count: " + booking.Travellers.Count);
 
         var package = _context.Packages
     .FirstOrDefault(p => p.Id == booking.PackageId);

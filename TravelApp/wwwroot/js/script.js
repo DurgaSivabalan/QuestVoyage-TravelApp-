@@ -52,19 +52,20 @@
 
     if (hamburger && sidebar && overlay && closeBtn) {
         hamburger.addEventListener("click", function () {
-            sidebar.classList.add("active");
-            overlay.classList.add("active");
+            sidebar.classList.add("open");      // was "active"
+            overlay.classList.add("show");      // was "active"
         });
 
         closeBtn.addEventListener("click", function () {
-            sidebar.classList.remove("active");
-            overlay.classList.remove("active");
+            sidebar.classList.remove("open");   // was "active"
+            overlay.classList.remove("show");   // was "active"
         });
 
         overlay.addEventListener("click", function () {
-            sidebar.classList.remove("active");
-            overlay.classList.remove("active");
+            sidebar.classList.remove("open");   // was "active"
+            overlay.classList.remove("show");   // was "active"
         });
+    }
     } else {
         console.log("Element missing ❌");
     }

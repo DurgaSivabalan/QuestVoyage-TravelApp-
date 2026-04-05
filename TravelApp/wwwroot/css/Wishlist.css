@@ -3,16 +3,18 @@
 /* ===== Page wrapper ===== */
 .wishlist-page {
     min-height: 100vh;
-    padding: 100px 48px 64px;
     font-family: 'DM Sans', sans-serif;
     background: #080e1a;
+    padding-top:30px;
+    padding-left:30px;
+
 }
 
 /* ===== Header ===== */
 .wishlist-header {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 48px;
 }
 
@@ -35,12 +37,7 @@
     line-height: 1.15;
 }
 
-.wishlist-underline {
-    width: 56px;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b35, #f7c948);
-    border-radius: 2px;
-}
+
 
 .wishlist-count-badge {
     display: flex;

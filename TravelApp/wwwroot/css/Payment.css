@@ -1,176 +1,289 @@
-﻿/* ===== RESET (FOR THIS PAGE ONLY) ===== */
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ===== Page ===== */
 body {
+    background-color: #0d1117;
+    font-family: 'DM Sans', sans-serif;
+    color: #ffffff;
     margin: 0;
     padding: 0;
-    justify-content: center; /* center horizontally */
-    align-items: center;
-    color:black;
-    background: #f5f7fa !important; /* remove image */
-    font-family: Arial, sans-serif;
 }
 
-/* ===== MAIN WRAPPER ===== */
-.payment-bg {
-    min-height: 100vh;
-    padding: 40px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to right, #f5f7fa, #e4ecf3);
+main {
+    padding-top: 0 !important;
 }
 
-/* ===== CARD ===== */
-.payment-card {
-    background: #ffffff;
-    text-align: center;
-    width: 400px;
-    max-width: 90%;
-    margin: auto;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* ===== BACK BUTTON ===== */
-.back-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
+/* ===== Back Button ===== */
 .back-btn {
-    padding: 10px 20px;
-    color: black;
-    margin-top: 10px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 6px;
+    background: transparent;
+    border: 1px solid #2e3a50;
+    color: #94a3b8;
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
     cursor: pointer;
+    margin: 24px 0 0 48px;
+    display: inline-block;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-/* ===== TITLE ===== */
-.payment-card h2 {
-    margin-bottom: 15px;
-    color: #2c3e50;
+    .back-btn:hover {
+        border-color: #ff6b35;
+        color: #ff6b35;
+    }
+
+/* ===== Wrapper ===== */
+.payment-wrapper {
+    max-width: 520px;
+    margin: 20px auto 60px;
 }
 
-/* ===== COUPON ===== */
+/* ===== Payment Card ===== */
+.payment-card {
+    background-color: #161d2e;
+    border-radius: 16px;
+    border: 1px solid #2e3a50;
+    padding: 36px 40px;
+}
+
+    /* ===== Heading ===== */
+    .payment-card h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 6px 0;
+    }
+
+        .payment-card h2::after {
+            content: '';
+            display: block;
+            width: 44px;
+            height: 3px;
+            background-color: #ff6b35;
+            border-radius: 2px;
+            margin-top: 10px;
+            margin-bottom: 24px;
+        }
+
+    /* ===== Package name ===== */
+    .payment-card > p:first-of-type {
+        font-size: 0.88rem;
+        color: #64748b;
+        margin: 0 0 6px 0;
+    }
+
+    /* ===== Total Amount ===== */
+    .payment-card h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #ff6b35;
+        margin: 0 0 6px 0;
+    }
+
+    /* ===== Secure label ===== */
+    .payment-card > p:last-of-type {
+        font-size: 0.75rem;
+        color: #475569;
+        margin: 0 0 20px 0;
+    }
+
+/* ===== Coupon Box ===== */
 .coupon-box {
     display: flex;
     gap: 10px;
-    margin: 15px 0;
+    margin-bottom: 12px;
 }
 
     .coupon-box input {
         flex: 1;
-        padding: 10px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
+        background-color: #1c2b3a;
+        border: 1px solid #2e3a50;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        color: #e2e8f0;
+        font-family: 'DM Sans', sans-serif;
+        outline: none;
+        transition: border-color 0.2s ease;
     }
+
+        .coupon-box input:focus {
+            border-color: #ff6b35;
+        }
 
     .coupon-box button {
-        background: cadetblue;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 6px;
+        background-color: transparent;
+        border: 1px solid #ff6b35;
+        color: #ff6b35;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        font-family: 'DM Sans', sans-serif;
         cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        white-space: nowrap;
     }
 
-/* ===== AMOUNT ===== */
-.amount-box {
-    margin: 15px 0;
+        .coupon-box button:hover {
+            background-color: #ff6b35;
+            color: #ffffff;
+        }
+
+/* ===== Discount text ===== */
+.payment-card > p {
+    font-size: 0.82rem;
+    color: #64748b;
+    margin: 0 0 16px 0;
 }
 
-    .amount-box p {
-        color: #666;
-    }
-
-    .amount-box h1 {
-        margin: 10px 0;
-        font-size: 32px;
-        color: #2c3e50;
-    }
-
-/* ===== TEXT ===== */
-.secure-text {
-    color: gray;
-    font-size: 14px;
-    margin-bottom: 15px;
+/* ===== Divider ===== */
+.payment-card hr,
+hr {
+    border: none;
+    border-top: 1px solid #2e3a50;
+    margin: 20px 0;
 }
 
-/* ===== METHODS ===== */
+/* ===== Payment Methods ===== */
 .methods {
-    margin-top: 15px;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
 }
 
     .methods label {
-        display: block;
-        padding: 10px;
-        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #1a2540;
+        border: 1px solid #2e3a50;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-size: 0.85rem;
+        color: #cbd5e1;
         cursor: pointer;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+        flex: 1;
+        justify-content: center;
     }
 
         .methods label:hover {
-            background: #f1f5ff;
+            border-color: #ff6b35;
+            background-color: #1f2d42;
         }
 
-/* ===== INPUTS ===== */
-#paymentDetails input,
-#paymentDetails select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    .methods input[type="radio"] {
+        accent-color: #ff6b35;
+        width: 15px;
+        height: 15px;
+    }
+
+/* ===== Method Sections ===== */
+.method-section {
+    background-color: #1a2540;
+    border-radius: 12px;
+    border: 1px solid #2e3a50;
+    padding: 20px 24px;
+    margin-bottom: 20px;
 }
 
-/* ===== PAY BUTTON ===== */
+    .method-section h3 {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 16px 0;
+    }
+
+    /* UPI QR ===== */
+    .method-section img {
+        display: block;
+        margin: 0 auto 14px;
+        border-radius: 10px;
+        border: 4px solid #ffffff;
+        width: 160px;
+        height: 160px;
+    }
+
+    .method-section > p {
+        text-align: center;
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0;
+    }
+
+    /* Card inputs ===== */
+    .method-section input[type="text"],
+    .method-section input[type="password"] {
+        width: 100%;
+        background-color: #1c2b3a;
+        border: 1px solid #2e3a50;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        color: #e2e8f0;
+        font-family: 'DM Sans', sans-serif;
+        outline: none;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+        transition: border-color 0.2s ease;
+    }
+
+    .method-section input:focus {
+        border-color: #ff6b35;
+    }
+
+    /* Net banking ===== */
+    .method-section strong {
+        color: #94a3b8;
+    }
+
+/* ===== Pay Button ===== */
 .pay-btn {
+    display: block;
     width: 100%;
-    padding: 14px;
-    background: #2a66b3;
-    color: white;
-    border-radius: 8px;
+    background-color: #ff6b35;
+    color: #ffffff;
     border: none;
-    margin-top: 20px;
-    font-size: 16px;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 0.95rem;
     font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
     cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-sizing: border-box;
+    margin-top: 4px;
 }
 
     .pay-btn:hover {
-        background: #1f4f8c;
+        background-color: #e55a28;
+        transform: translateY(-2px);
     }
 
-/* ===== LOADER ===== */
-.loader {
-    margin-top: 15px;
+/* ===== Loader ===== */
+#loader {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: #ff6b35;
+    letter-spacing: 0.06em;
+    animation: pulse 1s infinite;
 }
 
-.spinner {
-    width: 30px;
-    height: 30px;
-    border: 4px solid #ccc;
-    border-top: 4px solid #2563eb;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: auto;
-}
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
 
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
+    50% {
+        opacity: 0.4;
     }
 }
-
-/* ===== UTIL ===== */
-.hidden {
-    display: none;
-}
-.payment-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+    

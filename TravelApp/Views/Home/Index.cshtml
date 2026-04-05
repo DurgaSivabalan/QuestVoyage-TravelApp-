@@ -1,5 +1,7 @@
 ﻿@inject TravelApp.Models.AppDbContext _context
 @{
+    ViewData["Title"] = "Home";
+
     var user = ViewBag.User;
     var bookings = ViewBag.Bookings;
 }
@@ -26,7 +28,6 @@
    <ul>
     <li><a href="#home">Home</a></li>
     <li><a href="/Flights/Flights">Top Bookings</a></li>
-    <li><a href="/About/About">About</a></li>
     <li><a href="/Testimonial/Testimonial">Testimonial</a></li>
 </ul>
    
@@ -393,7 +394,35 @@
     </div>
 </footer>
 
-    
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.getElementById("hamburger");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        const closeBtn = document.getElementById("closeBtn");
+
+        if (hamburger) {
+            hamburger.addEventListener("click", function () {
+                sidebar.classList.add("open");
+                overlay.classList.add("show");
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+                sidebar.classList.remove("open");
+                overlay.classList.remove("show");
+            });
+        }
+
+        if (overlay) {
+            overlay.addEventListener("click", function () {
+                sidebar.classList.remove("open");
+                overlay.classList.remove("show");
+            });
+        }
+    });
+</script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="~/js/auth.js"></script>

@@ -7,20 +7,11 @@
     <!-- Header -->
     <div class="wishlist-header">
         <div class="wishlist-header-left">
-            <span class="wishlist-eyebrow">Your Collection</span>
             <h1 class="wishlist-title">My Wishlist</h1>
             <div class="wishlist-underline"></div>
         </div>
-        @if (Model.Any())
-        {
-            <div class="wishlist-count-badge">
-                <span>❤️</span>
-                <strong>@Model.Count</strong> saved
-            </div>
-        }
-    </div>
-
-    @if (Model.Any())
+   
+       @if (Model.Any())
     {
         <div class="wishlist-container">
             @foreach (var item in Model)
@@ -70,7 +61,7 @@
             <div class="empty-icon">🗺️</div>
             <h2>Your wishlist is empty</h2>
             <p>Start exploring and save your favourite destinations!</p>
-            <a href="/" class="explore-btn">Explore Destinations</a>
+            <a href="/Packages/Index" class="explore-btn">Explore Destinations</a>
         </div>
     }
 

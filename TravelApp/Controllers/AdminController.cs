@@ -57,7 +57,7 @@ namespace TravelApp.Controllers
 
             return RedirectToAction("Admin");
         }
-
+        [HttpPost]
         public IActionResult DeleteBooking(int id)
         {
             var booking = _context.Bookings.Find(id);
@@ -83,29 +83,7 @@ namespace TravelApp.Controllers
 
             return Ok();
         }
-        public IActionResult DeletePackage(int id)
-        {
-            var pkg = _context.Packages.FirstOrDefault(p => p.Id == id);
-
-            if (pkg != null)
-            {
-                // ✅ STEP 1: Delete related bookings
-                var bookings = _context.Bookings.Where(b => b.PackageId == id);
-                _context.Bookings.RemoveRange(bookings);
-
-                // ✅ STEP 2: Delete related wishlist
-                var wishlists = _context.Wishlists.Where(w => w.PackageId == id);
-                _context.Wishlists.RemoveRange(wishlists);
-
-                // ✅ STEP 3: Delete package
-                _context.Packages.Remove(pkg);
-
-                // ✅ STEP 4: Save everything
-                _context.SaveChanges();
-            }
-
-            return RedirectToAction("Admin");
-        }
+     
         [HttpPost]
         public IActionResult DeleteSubscriber(int id)
         {
@@ -164,6 +142,15 @@ namespace TravelApp.Controllers
                                  .ToList();
 
             return View(reviews);
+        }
+
+        [HttpPost]
+        public IActionResult ClearBookings()
+        {
+            var allBookings = _context.Bookings.ToList();
+            _context.Bookings.RemoveRange(allBookings);
+            _context.SaveChanges();
+            return RedirectToAction("Admin");
         }
 
         // 🗑 DELETE REVIEW (optional)

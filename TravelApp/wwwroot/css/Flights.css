@@ -1,369 +1,271 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap');
 
-* {
+/* ===== Page ===== */
+body {
+    background-color: #0d1117;
+    font-family: 'DM Sans', sans-serif;
+    color: #ffffff;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body {
-    font-family: 'DM Sans', sans-serif;
-    background-color: #f7f5f0;
-    color: #2d3748;
-    line-height: 1.6;
+main {
+    padding-top: 0 !important;
 }
 
-h2, h3, h4 {
-    font-family: 'Playfair Display', serif;
+/* ===== Page Wrapper ===== */
+.every {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 48px 60px;
 }
 
-/* ── Section Containers ── */
+    /* ===== Section Headings ===== */
+    .every h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 8px 0;
+    }
 
+        .every h2::after {
+            content: '';
+            display: block;
+            width: 48px;
+            height: 3px;
+            background-color: #ff6b35;
+            border-radius: 2px;
+            margin-top: 8px;
+            margin-bottom: 28px;
+        }
+
+/* ===== Each Section Block ===== */
 .flights,
 .places,
 .Hotels {
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 48px 32px;
-    margin: 24px 32px;
-    box-shadow: 0 4px 24px -4px rgba(45, 55, 72, 0.08);
+    margin-bottom: 56px;
 }
 
-    .flights h2,
-    .places h2,
-    .Hotels h2 {
-        font-size: 2.25rem;
-        font-weight: 700;
-        text-align: center;
-        color: #2d3748;
-        margin-bottom: 40px;
-        letter-spacing: -0.02em;
-        line-height: 1.2;
-    }
-
-/* ── Flights Section ── */
-
-.flights1 {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 28px;
+/* ===== 3-column grid ===== */
+.flights1,
+.places1,
+.Hotels1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
+/* Hotels1 has 4 items */
+.Hotels1 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* ===== Airline Cards ===== */
 .indigo,
 .airindia,
 .spicejet {
-    width: 280px;
-    border: 1px solid #e2ddd5;
-    border-radius: 16px;
-    padding: 32px 24px;
-    text-align: center;
-    background: #ffffff;
+    background-color: #161d2e;
+    border-radius: 14px;
+    border: 1px solid #2e3a50;
+    padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 24px -4px rgba(45, 55, 72, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
     .indigo:hover,
     .airindia:hover,
     .spicejet:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px -8px rgba(45, 55, 72, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.4);
     }
 
-    .indigo img,
-    .airindia img,
-    .spicejet img {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        margin: 0 auto 16px;
-        display: block;
-        border-radius: 12px;
-        padding: 8px;
-        background: #f7f5f0;
+/* Airline images */
+.flights1 img {
+    height: 160px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    margin: 0 0 14px 0 !important;
+    display: block;
+}
+
+/* Airline name */
+.flights1 h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+}
+
+/* Destinations list */
+.flights1 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+    .flights1 ul li {
+        font-size: 0.82rem;
+        color: #64748b;
+        padding: 6px 0;
+        border-bottom: 1px solid #1f2d42;
     }
 
-    .indigo h4,
-    .airindia h4,
-    .spicejet h4 {
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: #2d3748;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    .indigo ul,
-    .airindia ul,
-    .spicejet ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-        .indigo ul li,
-        .airindia ul li,
-        .spicejet ul li {
-            padding: 8px 0;
-            color: #718096;
-            font-size: 0.95rem;
-            text-align: center;
-            border-bottom: 1px solid #f0ece4;
+        .flights1 ul li:last-child {
+            border-bottom: none;
         }
 
-            .indigo ul li:last-child,
-            .airindia ul li:last-child,
-            .spicejet ul li:last-child {
-                border-bottom: none;
-            }
-
-/* ── Destinations / Places Section ── */
-
-.places {
-    background-color: #f7f5f0;
-}
-
-.places1 {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 28px;
-}
-
+/* ===== Place Cards ===== */
 .Taj,
 .Raj,
 .Aaj {
-    width: 320px;
-    border: 1px solid #e2ddd5;
-    border-radius: 16px;
+    background-color: #161d2e;
+    border-radius: 14px;
+    border: 1px solid #2e3a50;
     overflow: hidden;
-    background: #ffffff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 24px -4px rgba(45, 55, 72, 0.08);
 }
 
     .Taj:hover,
     .Raj:hover,
     .Aaj:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px -8px rgba(45, 55, 72, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.4);
     }
 
-    .Taj img,
-    .Raj img,
-    .Aaj img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.5s ease;
-    }
-
-    .Taj:hover img,
-    .Raj:hover img,
-    .Aaj:hover img {
-        transform: scale(1.05);
-    }
-
-    .Taj h4,
-    .Raj h4,
-    .Aaj h4 {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #2d3748;
-        padding: 20px 20px 8px;
-        text-align: left;
-    }
-
-    .Taj p,
-    .Raj p,
-    .Aaj p {
-        font-size: 0.9rem;
-        color: #718096;
-        padding: 0 20px 20px;
-        text-align: left;
-        line-height: 1.7;
-    }
-
-/* ── Hotels Section ── */
-
-.Hotels1 {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 24px;
-    padding: 0;
+/* Place images */
+.places1 img {
+    height: 180px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
 }
 
+/* Place content */
+.places1 h4 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 14px 16px 8px;
+    line-height: 1.3;
+}
+
+.places1 p {
+    font-size: 0.78rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0 16px 16px;
+}
+
+/* ===== Hotel Cards ===== */
 .lake,
 .desert,
 .city,
 .hill {
-    width: 260px;
-    border: 1px solid #e2ddd5;
-    border-radius: 16px;
-    padding: 28px 22px;
-    background: #ffffff;
+    background-color: #161d2e;
+    border-radius: 14px;
+    border: 1px solid #2e3a50;
+    padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 24px -4px rgba(45, 55, 72, 0.08);
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
     .lake:hover,
     .desert:hover,
     .city:hover,
     .hill:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px -8px rgba(45, 55, 72, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.4);
     }
 
-    .lake h4,
-    .desert h4,
-    .city h4,
-    .hill h4 {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: #2d3748;
-        margin-bottom: 16px;
-        text-align: center;
-        line-height: 1.3;
+    /* Orange top bar on hotel cards */
+    .lake::before,
+    .desert::before,
+    .city::before,
+    .hill::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #ff6b35, #f7c948);
     }
 
-    .lake ul,
-    .desert ul,
-    .city ul,
-    .hill ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 20px;
-        flex: 1;
-    }
+/* Hotel name */
+.Hotels1 h4 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 14px 0;
+    line-height: 1.3;
+}
 
-        .lake ul li,
-        .desert ul li,
-        .city ul li,
-        .hill ul li {
-            padding: 6px 0;
-            color: #718096;
-            font-size: 0.88rem;
-            text-align: left;
-            position: relative;
-            padding-left: 16px;
-        }
+/* Amenities list */
+.Hotels1 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
 
-            .lake ul li::before,
-            .desert ul li::before,
-            .city ul li::before,
-            .hill ul li::before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background-color: #3d8ea6;
-            }
-
-    .lake p,
-    .desert p,
-    .city p,
-    .hill p {
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #2d3748;
-        text-align: center;
-        padding-top: 16px;
-        border-top: 1px solid #e2ddd5;
-        margin-top: auto;
-    }
-
-    .lake button,
-    .desert button,
-    .city button,
-    .hill button {
-        display: block;
-        margin: 16px auto 0;
-        padding: 10px 24px;
-        border-radius: 10px;
-        background: #3d8ea6;
-        border: none;
-        cursor: pointer;
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 600;
-        font-size: 0.9rem;
-        transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-        .lake button:hover,
-        .desert button:hover,
-        .city button:hover,
-        .hill button:hover {
-            background: #2e7389;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(61, 142, 166, 0.3);
-        }
-
-        .lake button a,
-        .desert button a,
-        .city button a,
-        .hill button a {
-            text-decoration: none;
-            color: #ffffff;
-        }
-
-/* ── Responsive ── */
-
-@media (max-width: 768px) {
-    .flights,
-    .places,
-    .Hotels {
-        margin: 16px;
-        padding: 32px 20px;
-    }
-
-        .flights h2,
-        .places h2,
-        .Hotels h2 {
-            font-size: 1.6rem;
-            margin-bottom: 28px;
-        }
-
-    .flights1,
-    .places1,
-    .Hotels1 {
-        flex-direction: column;
+    .Hotels1 ul li {
+        font-size: 0.78rem;
+        color: #64748b;
+        padding: 5px 0;
+        border-bottom: 1px solid #1f2d42;
+        display: flex;
         align-items: center;
+        gap: 6px;
     }
 
-    .indigo,
-    .airindia,
-    .spicejet,
-    .Taj,
-    .Raj,
-    .Aaj,
-    .lake,
-    .desert,
-    .city,
-    .hill {
-        width: 100%;
-        max-width: 340px;
-    }
-}
-
-@media (max-width: 480px) {
-    .flights,
-    .places,
-    .Hotels {
-        margin: 10px;
-        padding: 24px 14px;
-    }
-
-        .flights h2,
-        .places h2,
-        .Hotels h2 {
-            font-size: 1.35rem;
+        .Hotels1 ul li::before {
+            content: '✓';
+            color: #ff6b35;
+            font-size: 0.7rem;
+            font-weight: 700;
         }
+
+        .Hotels1 ul li:last-child {
+            border-bottom: none;
+        }
+
+/* Hotel price button */
+.Hotels1 button {
+    width: 100%;
+    background-color: #ff6b35;
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 4px;
 }
+
+    .Hotels1 button:hover {
+        background-color: #e55a28;
+    }
+
+    .Hotels1 button a {
+        display: block;
+        padding: 10px 16px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'DM Sans', sans-serif;
+    }
