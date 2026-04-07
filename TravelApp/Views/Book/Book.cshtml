@@ -1,141 +1,142 @@
-﻿    @{
-        ViewData["Title"] = "Book";
-    }
-    @model TravelApp.Models.Booking
-    @using Microsoft.AspNetCore.Mvc.Rendering
-    <link rel="stylesheet" href="~/css/Book.css">
+﻿        @{
+            ViewData["Title"] = "Book";
+        }
+        @model TravelApp.Models.Booking
+        @using Microsoft.AspNetCore.Mvc.Rendering
+        <link rel="stylesheet" href="~/css/Book.css">
 
-        <h1>Book Your Dream Trip</h1>
+            <h1>Book Your Dream Trip</h1>
 
-        <div class="form-container">
+            <div class="form-container">
 
-            <form asp-controller="Book" asp-action="Summary" method="post" id="bookingForm">
+                <form asp-controller="Book" asp-action="Summary" method="post" id="bookingForm">
 
-        <div class="form-grid">
+            <div class="form-grid">
 
-            <!-- NAME -->
-            <div>
-                <label>Name</label>
-                <input type="text" name="Name" value="@Model?.Name" />
-            </div>
-
-            <!-- EMAIL -->
-            <div>
-                <label>Email</label>
-                <input type="email" name="UserEmail" value="@Model?.UserEmail" required />
-            </div>
-
-            <!-- MOBILE -->
-            <div>
-                <label>Mobile</label>
-                <input name="Mobile" value="@Model?.Mobile" required />
-            </div>
-
-            <!-- PACKAGE -->
-            <div>
-                <label>Select Package</label>
-                    <select id="packageName" asp-for="PackageId"
-                            asp-items="@(new SelectList(ViewBag.Packages, "Id", "Name"))">
-                    </select>
-            </div>
-
-            <!-- DEPARTURE -->
-            <div>
-                <label>Departure Date</label>
-                <input type="date" id="departureDate"
-                       name="DepartureDate"
-                           value="@(Model != null && Model.DepartureDate != DateTime.MinValue
-                                                   ? Model.DepartureDate.ToString("yyyy-MM-dd")
-                                                   : "")" />
-            </div>
-
-            <!-- ARRIVAL -->
-            <div>
-                <label>Arrival Date</label>
-                <input type="date"
-                       name="ArrivalDate" id="arrivalDate"
-                           value="@(Model != null && Model.ArrivalDate != DateTime.MinValue
-                                                   ? Model.ArrivalDate.ToString("yyyy-MM-dd")
-                                                   : "")" required />
-            </div>
-
-            <!-- ADULTS -->
-            <div>
-                <label>Adults</label>
-                    <input type="number" id="adults" name="Adults" value="@Model?.Adults" />
-
+                <!-- NAME -->
+                <div>
+                    <label>Name</label>
+                    <input type="text" name="Name" value="@Model?.Name" />
                 </div>
 
-            <!-- CHILDREN -->
-            <div>
-                <label>Children</label>
-                    <input type="number" id="children" name="Children" value="@Model?.Children" />
+                <!-- EMAIL -->
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="UserEmail" value="@Model?.UserEmail" required />
                 </div>
 
-        </div>
+                <!-- MOBILE -->
+                <div>
+                    <label>Mobile</label>
+                    <input name="Mobile" value="@Model?.Mobile" required />
+                </div>
 
-        <!-- ADD TRAVELLERS -->
-        <button type="button" id="addTravellersBtn" class="btn">
-            Add Traveller Details
-        </button>
+                <!-- PACKAGE -->
+                <div>
+                    <label>Select Package</label>
+                        <select id="packageName" asp-for="PackageId"
+                                asp-items="@(new SelectList(ViewBag.Packages, "Id", "Name", Model?.PackageId))">
+                        </select>
+                </div>
 
-        <!-- TRAVELLERS (LOAD EXISTING) -->
-        <div id="travellersContainer">
+                <!-- DEPARTURE -->
+                <div>
+                    <label>Departure Date</label>
+                    <input type="date" id="departureDate"
+                           name="DepartureDate"
+                               value="@(Model != null && Model.DepartureDate != DateTime.MinValue
+                                                       ? Model.DepartureDate.ToString("yyyy-MM-dd")
+                                                       : "")" />
+                </div>
 
-            @if (Model?.Travellers != null)
-            {
-                for (int i = 0; i < Model.Travellers.Count; i++)
-                {
-                    <div class="traveller-box">
-                        <input name="Travellers[@i].Name"
-                               value="@Model.Travellers[i].Name"
-                               placeholder="Name" />
+                <!-- ARRIVAL -->
+                <div>
+                    <label>Arrival Date</label>
+                    <input type="date"
+                           name="ArrivalDate" id="arrivalDate"
+                               value="@(Model != null && Model.ArrivalDate != DateTime.MinValue
+                                                       ? Model.ArrivalDate.ToString("yyyy-MM-dd")
+                                                       : "")" required />
+                        <div id="dateError" style="color:red; margin-top:5px;"></div>
+                </div>
 
-                        <input name="Travellers[@i].Age"
-                               value="@Model.Travellers[i].Age"
-                               placeholder="Age" />
-                            <select name="Travellers[@i].Gender">
+                <!-- ADULTS -->
+                <div>
+                    <label>Adults</label>
+                        <input type="number" id="adults" name="Adults" value="@Model?.Adults" />
 
-                                @if (Model.Travellers[i].Gender == "Male")
-                                {
-                                    <option value="Male" selected>Male</option>
-                                }
-                                else
-                                {
-                                    <option value="Male">Male</option>
-                                }
-
-                                @if (Model.Travellers[i].Gender == "Female")
-                                {
-                                    <option value="Female" selected>Female</option>
-                                }
-                                else
-                                {
-                                    <option value="Female">Female</option>
-                                }
-
-                            </select>
                     </div>
+
+                <!-- CHILDREN -->
+                <div>
+                    <label>Children</label>
+                        <input type="number" id="children" name="Children" value="@Model?.Children" />
+                    </div>
+
+            </div>
+
+            <!-- ADD TRAVELLERS -->
+            <button type="button" id="addTravellersBtn" class="btn">
+                Add Traveller Details
+            </button>
+
+            <!-- TRAVELLERS (LOAD EXISTING) -->
+            <div id="travellersContainer">
+
+                @if (Model?.Travellers != null)
+                {
+                    for (int i = 0; i < Model.Travellers.Count; i++)
+                    {
+                        <div class="traveller-box">
+                            <input name="Travellers[@i].Name"
+                                   value="@Model.Travellers[i].Name"
+                                   placeholder="Name" />
+
+                            <input name="Travellers[@i].Age"
+                                   value="@Model.Travellers[i].Age"
+                                   placeholder="Age" />
+                                <select name="Travellers[@i].Gender">
+
+                                    @if (Model.Travellers[i].Gender == "Male")
+                                    {
+                                        <option value="Male" selected>Male</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Male">Male</option>
+                                    }
+
+                                    @if (Model.Travellers[i].Gender == "Female")
+                                    {
+                                        <option value="Female" selected>Female</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Female">Female</option>
+                                    }
+
+                                </select>
+                        </div>
+                    }
                 }
-            }
 
-        </div>
+            </div>
 
-        <!-- SPECIAL REQUEST -->
-        <label>Special Request</label>
-        <textarea name="SpecialRequest">@Model?.SpecialRequest</textarea>
+            <!-- SPECIAL REQUEST -->
+            <label>Special Request</label>
+            <textarea name="SpecialRequest">@Model?.SpecialRequest</textarea>
+            
+            <!-- HIDDEN -->
+            <input type="hidden" name="Price" id="priceInput" value="@Model?.Price" />
+            <input type="hidden" name="Members" id="membersInput" value="@Model?.Members" />
 
-        <!-- HIDDEN -->
-        <input type="hidden" name="Price" id="priceInput" value="@Model?.Price" />
-        <input type="hidden" name="Members" id="membersInput" value="@Model?.Members" />
+            <!-- SUBMIT -->
+            <button type="submit" class="summary-btn">
+                Proceed to Summary →
+            </button>
 
-        <!-- SUBMIT -->
-        <button type="submit" class="summary-btn">
-            Proceed to Summary →
-        </button>
+        </form>
 
-    </form>
+            </div>
 
-        </div>
-
-    <script src="~/js/book.js"></script>
+        <script src="~/js/book.js"></script>

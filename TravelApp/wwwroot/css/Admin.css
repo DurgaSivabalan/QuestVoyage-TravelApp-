@@ -365,3 +365,94 @@ main {
         background-color: #22c55e;
         color: #ffffff;
     }
+
+
+
+
+
+@media (max-width: 1024px) {
+
+    /* Cards → 2 per row */
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Header spacing */
+    .admin-container {
+        padding: 20px;
+    }
+
+    /* Contact cards */
+    .contact-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px) {
+
+    /* HEADER STACK */
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Cards → single column */
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    /* TABS → scrollable */
+    .admin-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .tab-btn {
+        flex: unset;
+        min-width: 120px;
+    }
+
+    /* TABLE FIX (IMPORTANT) */
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    /* CONTACT CARDS */
+    .contact-list {
+        grid-template-columns: 1fr;
+    }
+
+    /* ACTION BUTTONS */
+    .admin-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Title size */
+    .admin-header h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Card text */
+    .card p {
+        font-size: 1.4rem;
+    }
+
+    /* Table text smaller */
+    .styled-table,
+    .admin-table {
+        font-size: 0.75rem;
+    }
+
+    /* Reduce padding */
+    .admin-container {
+        padding: 16px;
+    }
+}

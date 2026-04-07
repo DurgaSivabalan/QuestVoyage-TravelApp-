@@ -19,20 +19,17 @@
                 <p>Sign in to continue your journey</p>
             </div>
 
-            @if (ViewBag.Error != null)
-            {
-                <div class="auth-msg-error">@ViewBag.Error</div>
-            }
-
+           
             <form asp-controller="Login" asp-action="Login" method="post" autocomplete="off">
                 <input type="email" name="Email" placeholder="Email address" autocomplete="off" required />
                 <input type="password" name="Password" placeholder="Password" autocomplete="new-password" required />
                 <button type="submit">Sign in</button>
             </form>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             @if (ViewBag.Success != null)
             {
-                <div class="auth-msg-success">@ViewBag.Success</div>
+                <p style="color:green">@ViewBag.Success</p>
             }
         </div>
 

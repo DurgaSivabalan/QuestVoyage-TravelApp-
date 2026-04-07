@@ -228,3 +228,110 @@
         padding: 1.1rem 1.1rem;
     }
 }
+@media (max-width: 768px) {
+
+    /* Page padding */
+    .review-page {
+        padding: 2rem 1rem;
+    }
+
+    /* Card width */
+    .review-form-card {
+        max-width: 100%;
+    }
+
+        /* Heading */
+        .review-form-card > h2 {
+            font-size: 28px;
+        }
+
+    /* Form */
+    .review-form {
+        padding: 1.5rem;
+    }
+
+    /* Review card */
+    .review-card {
+        padding: 1.2rem;
+    }
+
+    /* Header spacing */
+    .review-header {
+        gap: 10px;
+    }
+
+    /* Avatar */
+    .avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Heading */
+    .review-form-card > h2 {
+        font-size: 22px;
+    }
+
+    /* Form */
+    .review-form {
+        padding: 1.2rem;
+        gap: 10px;
+    }
+
+        /* Inputs */
+        .review-form input,
+        .review-form textarea {
+            font-size: 13px;
+            padding: 10px 12px;
+        }
+
+    /* ⭐ STAR FIX (IMPORTANT) */
+    .star-rating label {
+        font-size: 24px;
+    }
+
+    /* Review header stack */
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    /* Avatar smaller */
+    .avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    /* Name */
+    .review-header h4 {
+        font-size: 14px;
+    }
+
+    /* Stars */
+    .stars span {
+        font-size: 13px;
+    }
+
+    /* Review text */
+    .review-text {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    /* Button full width */
+    .review-card form button {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    /* Submit button */
+    .review-form button[type="submit"] {
+        font-size: 12px;
+        padding: 10px;
+    }
+}

@@ -11,41 +11,42 @@ public class LoginController : Controller
         {
             _context = context;
         }
-        // LOGIN PAGE
+        // login page
         public IActionResult Login()
         {
             return View();
         }
-        // LOGIN POST
+        //login post
         [HttpPost]
         public IActionResult Login(User model)
         {
-            // 🔴 ADMIN LOGIN
+            //admin login
             if (model.Email == "admin@questvoyage.com" && model.Password == "Admin@123")
             {
                 HttpContext.Session.SetString("Admin", "true");
                 Console.WriteLine("Admin Session Set");
                 return RedirectToAction("Admin", "Admin");
             }
-
-            // 🟢 USER LOGIN
+            //user login
             var user = _context.Users
-                .FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
-            if (user != null)
+        .FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+
+            if (user == null)
             {
-                HttpContext.Session.SetString("User", user.Email);
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", "Invalid email or password"); // ✅ THIS IS KEY
+                return View(model); // return same page
             }
 
-            ViewBag.Error = "Invalid Email or Password ❌";
-            return View();
+            HttpContext.Session.SetString("User", user.Email);
+
+            return RedirectToAction("Index", "Home");
         }
-        // REGISTER PAGE
+        // register page
         public IActionResult Register()
         {
             return View();
         }
-        // REGISTER POST
+        // register post
         [HttpPost]
         public IActionResult Register(User model, string confirmPassword)
         {

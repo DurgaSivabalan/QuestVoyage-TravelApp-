@@ -11,7 +11,7 @@ namespace TravelApp.Controllers
         {
             _context = context;
         }
-
+        //add package
         [HttpPost]
         public IActionResult Add(int id)
         {
@@ -21,7 +21,7 @@ namespace TravelApp.Controllers
                 return Unauthorized();
 
             var exists = _context.Wishlists
-                .Any(x => x.PackageId == id && x.UserEmail == email); // ✅ FIX
+                .Any(x => x.PackageId == id && x.UserEmail == email); 
 
             if (exists)
                 return BadRequest();
@@ -36,7 +36,7 @@ namespace TravelApp.Controllers
 
             return Ok();
         }
-
+        //showing them
         public IActionResult Wishlist()
         {
             var email = HttpContext.Session.GetString("User");
@@ -46,7 +46,7 @@ namespace TravelApp.Controllers
 
             var packageIds = _context.Wishlists
                 .Where(x => x.UserEmail == email)
-                .Select(x => x.PackageId) // ✅ IMPORTANT FIX
+                .Select(x => x.PackageId) // 
                 .ToList();
 
             var packages = _context.Packages
@@ -55,7 +55,7 @@ namespace TravelApp.Controllers
 
             return View(packages);
         }
-
+        //remove wishlist item
         public IActionResult Remove(int id)
         {
             var email = HttpContext.Session.GetString("User");

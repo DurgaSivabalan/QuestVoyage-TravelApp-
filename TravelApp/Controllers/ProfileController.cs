@@ -6,10 +6,6 @@ public class ProfileController : Controller
 {
     private readonly AppDbContext _context;
     private readonly string? userEmail;
-
-
-
-
     public ProfileController(AppDbContext context)
     {
         _context = context;
@@ -26,8 +22,8 @@ public class ProfileController : Controller
 
         var bookings = _context.Bookings
     .Where(b => b.UserEmail == email)
-    .OrderByDescending(b => b.Id)   // latest first
-    .Take(3)                        // only last 3
+    .OrderByDescending(b => b.Id)   
+    .Take(3)                        
     .ToList();
 
         ViewBag.User = user;
@@ -48,16 +44,18 @@ public class ProfileController : Controller
         user.Name = Name;
         user.Phone = Phone;
 
-        // 🔴 REMOVE PHOTO
+        // REMOVE PHOTO
         if (RemovePhoto == "true")
         {
             user.ProfileImage = null;
         }
 
-        // 🟢 UPLOAD NEW PHOTO (THIS MUST COME AFTER REMOVE CHECK)
+        // UPLOAD NEW PHOTO (THIS MUST COME AFTER REMOVE CHECK)
         if (ImageFile != null && ImageFile.Length > 0)
         {
+            //unique file name
             string fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+            //save path
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
 
             using (var stream = new FileStream(path, FileMode.Create))

@@ -1,17 +1,13 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
     console.log("JS READY");
-
     const form = document.getElementById("subscribeForm");
     const msg = document.getElementById("subscribeMessage");
-
-    // ✅ SUBSCRIBE LOGIC
+    // SUBSCRIBE LOGIC
     if (form) {
         form.addEventListener("submit", function (e) {
             e.preventDefault(); // stop page reload
-
             const name = document.getElementById("nameInput").value;
             const email = document.getElementById("emailInput").value;
-
             fetch('/Subscriber/Subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -30,7 +26,6 @@
                     } else {
                         msg.classList.add("error");
                     }
-
                     setTimeout(() => {
                         msg.innerText = "";
                         msg.classList.remove("success", "error");
@@ -65,7 +60,7 @@
             sidebar.classList.remove("open");   // was "active"
             overlay.classList.remove("show");   // was "active"
         });
-    }
+    
     } else {
         console.log("Element missing ❌");
     }

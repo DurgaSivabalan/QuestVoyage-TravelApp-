@@ -1,11 +1,12 @@
 ﻿document.getElementById("contactForm").addEventListener("submit", function (e) {
 
+    
     e.preventDefault();
 
     const form = this;
     const data = new FormData(form);
 
-    fetch('/Contact/Submit', {
+    fetch('/Form/Submit', {
         method: 'POST',
         body: data
     })
@@ -25,5 +26,6 @@
         .catch(() => {
             document.getElementById("errorMessage").innerText = "Server error";
         });
+
 
 });

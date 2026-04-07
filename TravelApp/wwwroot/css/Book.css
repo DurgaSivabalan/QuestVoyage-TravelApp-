@@ -185,4 +185,66 @@ textarea {
         background-color: #e55a28;
         transform: translateY(-2px);
     }
-    
+@media (max-width: 768px) {
+
+    /* FORM CONTAINER */
+    .form-container {
+        padding: 24px 20px;
+        margin: 20px;
+    }
+
+    /* 🔥 IMPORTANT: 2 column → 1 column */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* Traveller box spacing */
+    .traveller-box {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+        .traveller-box input,
+        .traveller-box select {
+            width: 100%;
+        }
+
+    /* Button full width */
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Heading */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Container */
+    .form-container {
+        padding: 18px 14px;
+        border-radius: 12px;
+    }
+
+    /* Inputs */
+    input,
+    select,
+    textarea {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+    }
+
+    /* Traveller box */
+    .traveller-box {
+        padding: 12px;
+    }
+
+    /* Submit button */
+    .summary-btn {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+}

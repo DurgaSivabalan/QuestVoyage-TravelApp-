@@ -145,3 +145,79 @@ main {
         color: #475569;
         margin: 0;
     }
+@media (max-width: 768px) {
+
+    /* Wrapper spacing */
+    .booking-page {
+        padding: 20px 16px 40px;
+    }
+
+    /* Title */
+    .booking-title {
+        font-size: 1.6rem;
+    }
+
+    /* Card padding */
+    .booking-card {
+        padding: 20px;
+    }
+
+        /* Info rows adjust */
+        .booking-card p {
+            font-size: 0.82rem;
+            gap: 8px;
+        }
+
+            .booking-card p b {
+                font-size: 0.7rem;
+            }
+}
+@media (max-width: 480px) {
+
+    /* Wrapper */
+    .booking-page {
+        padding: 16px 12px 30px;
+    }
+
+    /* Title */
+    .booking-title {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    /* Card */
+    .booking-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+        /* 🔥 IMPORTANT: STACK TEXT */
+        .booking-card p {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            font-size: 0.8rem;
+        }
+
+            .booking-card p b {
+                font-size: 0.68rem;
+            }
+
+            /* Highlight total */
+            .booking-card p:last-of-type {
+                font-size: 0.9rem;
+            }
+
+    /* No bookings */
+    .no-bookings {
+        padding: 50px 16px;
+    }
+
+        .no-bookings h3 {
+            font-size: 1.3rem;
+        }
+
+        .no-bookings p {
+            font-size: 0.8rem;
+        }
+}

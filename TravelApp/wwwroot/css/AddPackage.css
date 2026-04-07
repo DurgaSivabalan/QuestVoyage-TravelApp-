@@ -144,3 +144,65 @@ button[type="submit"] {
         background-color: #e55a28;
         transform: translateY(-2px);
     }
+@media (max-width: 768px) {
+
+    .form-wrapper {
+        padding: 20px 12px;
+    }
+
+    .form-container {
+        padding: 28px 20px;
+        border-radius: 12px;
+    }
+
+        .form-container h2 {
+            font-size: 1.4rem;
+        }
+
+    .subtitle {
+        font-size: 0.75rem;
+        margin-bottom: 20px;
+    }
+
+    /*  IMPORTANT: collapse 2 columns */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    button[type="submit"] {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
+@media (max-width: 480px) {
+
+    .form-wrapper {
+        padding: 16px 10px;
+    }
+
+    .form-container {
+        padding: 22px 16px;
+    }
+
+        .form-container h2 {
+            font-size: 1.2rem;
+        }
+
+    .subtitle {
+        font-size: 0.72rem;
+    }
+
+    .form-group label {
+        font-size: 0.7rem;
+    }
+
+    .form-group input {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    button[type="submit"] {
+        padding: 11px;
+        font-size: 0.85rem;
+    }
+}

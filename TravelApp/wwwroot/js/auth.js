@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     window.logoutUser = function () {
-        window.location.href = "/Login/Login";
+        window.location.href = "/Login/Logout";
     };
 
 });
@@ -30,13 +30,13 @@ function showTab(tabId) {
     event.target.classList.add("active")
 
 }
-function showTab(tabName) {
-    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+//function showTab(tabName) {
+//    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+//    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
 
-    document.getElementById(tabName).classList.add("active");
-    event.target.classList.add("active");
-}
+//    document.getElementById(tabName).classList.add("active");
+//    event.target.classList.add("active");
+//}
 function updateStatus(id, status) {
     fetch('/Admin/UpdateStatus', {
         method: 'POST',
@@ -63,7 +63,7 @@ function updatePayment(id, payment) {
 
 function deleteBooking(id) {
     if (confirm("Delete this booking?")) {
-        window.location.href = "/Admin//" + id;
+        window.location.href = "/Admin/DeleteBooking?id=" + id;
     }
 }
 

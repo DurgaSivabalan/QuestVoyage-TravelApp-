@@ -1,5 +1,7 @@
 ﻿@model List<TravelApp.Models.Booking>
-
+@{
+    ViewData["Title"] = "Admin";
+}
 <link rel="stylesheet" href="~/css/Admin.css?v=2">
 
     <div class="admin-container">
@@ -256,17 +258,17 @@
     <div class="admin-actions">
 
         <a href="/Packages/Create" class="admin-btn primary">
-            ➕ Add Package
+             Add Package
         </a>
             
            
             
             <form asp-controller="Admin" asp-action="ClearBookings" method="post">
-                <button class="admin-btn danger">🗑 Clear All</button>
+                <button class="admin-btn danger"> Clear All</button>
             </form>
 
         <button onclick="saveData()" class="admin-btn success">
-            💾 Save Data
+             Save Data
         </button>
 
     </div>

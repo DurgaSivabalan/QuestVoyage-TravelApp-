@@ -171,3 +171,111 @@ h1 {
             .container > div a:hover {
                 background-color: #e55a28;
             }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 8px;
+}
+
+.page-btn {
+    padding: 8px 14px;
+    background: #0f172a;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+    .page-btn.active {
+        background: orange;
+    }
+@media (max-width: 1024px) {
+
+    /* Grid → 2 columns feel */
+    #packageContainer {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+
+    /* Filter spacing */
+    .filter-box {
+        padding: 16px;
+        gap: 12px;
+    }
+
+        .filter-box select {
+            min-width: 140px;
+        }
+}
+@media (max-width: 768px) {
+
+    /* 🔥 Single column cards */
+    #packageContainer {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    /* Heading */
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    /* Filter → stack */
+    .filter-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .filter-box select {
+            width: 100%;
+        }
+
+    /* Buttons fix */
+    #packageContainer > div > div:last-child {
+        flex-direction: column;
+    }
+
+    #packageContainer > div button,
+    #packageContainer > div a {
+        width: 100%;
+    }
+
+    /* Pagination wrap */
+    .pagination {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .page-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Heading */
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    /* Card text */
+    #packageContainer > div h3 {
+        font-size: 0.9rem;
+    }
+
+    #packageContainer > div p {
+        font-size: 0.75rem;
+    }
+
+    /* Image height */
+    #packageContainer > div img {
+        height: 160px;
+    }
+
+    /* Buttons */
+    #packageContainer > div button,
+    #packageContainer > div a {
+        font-size: 0.75rem;
+        padding: 8px;
+    }
+}

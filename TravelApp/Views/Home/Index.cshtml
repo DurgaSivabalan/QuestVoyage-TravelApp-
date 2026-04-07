@@ -1,430 +1,429 @@
-﻿@inject TravelApp.Models.AppDbContext _context
-@{
-    ViewData["Title"] = "Home";
+﻿    @inject TravelApp.Models.AppDbContext _context
+    @{
+        ViewData["Title"] = "Home";
 
-    var user = ViewBag.User;
-    var bookings = ViewBag.Bookings;
-}
-
-@{
-    var email = Context.Session.GetString("User");
-
-    int wishlistCount = 0;
-
-    if (email != null)
-    {
-        wishlistCount = _context.Wishlists.Count(x => x.UserEmail == email);
+        var user = ViewBag.User;
+        var bookings = ViewBag.Bookings;
     }
-}
 
-<link rel="stylesheet" href="~/css/Style.css"/>
+    @{
+        var email = Context.Session.GetString("User");
+
+        int wishlistCount = 0;
+
+        if (email != null)
+        {
+            wishlistCount = _context.Wishlists.Count(x => x.UserEmail == email);
+        }
+    }
+
+    <link rel="stylesheet" href="~/css/Style.css"/>
 
 
-<aside class="sidebar" id="sidebar">
-    <div class="close-btn" id="closeBtn">✕</div>
+    <aside class="sidebar" id="sidebar">
+        <div class="close-btn" id="closeBtn">✕</div>
 
-    <h3 class="text-center">Quick Links</h3>
+        <h3 class="text-center">Quick Links</h3>
 
-   <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="/Flights/Flights">Top Bookings</a></li>
-    <li><a href="/Testimonial/Testimonial">Testimonial</a></li>
-</ul>
+       <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="/Flights/Flights">Top Bookings</a></li>
+        <li><a href="/Testimonial/Testimonial">Testimonial</a></li>
+    </ul>
    
 
-    <section class="sidebar-box contact-box">
-        <h4>📞 Contact Us</h4>
-        <p><strong>Phone:</strong> +91 98765 43210</p>
-        <p><strong>Email:</strong> support@questvoyage.com</p>
-        <a asp-controller="Form" asp-action="Form" class="contact-link">Send Message</a>
-    </section>
-</aside>
+        <section class="sidebar-box contact-box">
+            <h4>📞 Contact Us</h4>
+            <p><strong>Phone:</strong> +91 98765 43210</p>
+            <p><strong>Email:</strong> support@questvoyage.com</p>
+            <a asp-controller="Form" asp-action="Form" class="contact-link">Send Message</a>
+        </section>
+    </aside>
 
-<!-- OVERLAY -->
-<div class="overlay" id="overlay"></div>
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
 
-<!-- HEADER -->
-<header style="display:flex; flex-direction: column; gap: 20px">
+    <!-- HEADER -->
+    <header style="display:flex; flex-direction: column; gap: 20px">
 
-    <section class="navi">
+        <section class="navi">
 
-        <!-- LEFT -->
-        <div class="nav-left">
-            <img src="~/images/logo.jpg" class="logo-img" />
-            <h2 class="logo-text">QuestVoyage</h2>
-        </div>
+            <!-- LEFT -->
+            <div class="nav-left">
+                <img src="~/images/logo.jpg" class="logo-img" />
+                <h2 class="logo-text">QuestVoyage</h2>
+            </div>
 
-        <!-- RIGHT -->
-        <div class="nav-right">
+            <!-- RIGHT -->
+            <div class="nav-right">
 
             
-            <!-- ICONS -->
-            <div class="icon-btn">
-                <a asp-controller="Wishlist" asp-action="Wishlist">
-                    <img src="~/images/wishlist icon.png" />
-                    @if (wishlistCount > 0)
-                    {
-                        <span class="badge">@wishlistCount</span>
-                    }
-                </a>
-            </div>
-
-            <div class="icon-btn">
-                <a asp-controller="Packages" asp-action="Index">
-                    <img src="~/images/filter.png" />
-                </a>
-            </div>
-
-            <!-- PROFILE -->
-            <div class="profile-wrapper">
-                <div class="nav-avatar" id="profileToggle">
-                    @Context.Session.GetString("User")?.Substring(0,1).ToUpper()
-                </div>
-
-                <div class="profile-dropdown" id="profileBox">
-                    <a asp-controller="Profile" asp-action="Profile" class="dropdown-item">
-                        👤 @Context.Session.GetString("User")
+                <!-- ICONS -->
+                <div class="icon-btn">
+                    <a asp-controller="Wishlist" asp-action="Wishlist">
+                        <img src="~/images/wishlist icon.png" />
+                        @if (wishlistCount > 0)
+                        {
+                            <span class="badge">@wishlistCount</span>
+                        }
                     </a>
-                    <a asp-controller="Book" asp-action="History" class="dropdown-item">
-                        📖 My Bookings
+                </div>
+
+                <div class="icon-btn">
+                    <a asp-controller="Packages" asp-action="Index">
+                        <img src="~/images/filter.png" />
                     </a>
-                    <form asp-controller="Login" asp-action="Logout" method="post">
-                        <button class="dropdown-item logout-btn">Logout</button>
-                    </form>
                 </div>
+
+                <!-- PROFILE -->
+                <div class="profile-wrapper">
+                    <div class="nav-avatar" id="profileToggle">
+                        @Context.Session.GetString("User")?.Substring(0,1).ToUpper()
+                    </div>
+
+                    <div class="profile-dropdown" id="profileBox">
+                        <a asp-controller="Profile" asp-action="Profile" class="dropdown-item">
+                            👤 @Context.Session.GetString("User")
+                        </a>
+                        <a asp-controller="Book" asp-action="History" class="dropdown-item">
+                            📖 My Bookings
+                        </a>
+                        <form asp-controller="Login" asp-action="Logout" method="post">
+                            <button class="dropdown-item logout-btn">Logout</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- HAMBURGER -->
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
             </div>
 
-            <!-- HAMBURGER -->
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+        </section>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="welcome">
+        <section class="text-center">
+            <h1>Welcome to "Dream Destination"</h1>
+            <h3>
+                "Travel far enough, you meet yourself,
+                Let us plan the journey you'll never forget."
+            </h3>
+
+            <!-- REPLACE WITH -->
+            <div style="display:flex; gap:16px; justify-content:center; margin-top:32px;">
+                <a asp-controller="Book" asp-action="Book" class="hero-btn-primary">Book Trip</a>
+                <a asp-controller="Packages" asp-action="Index" class="hero-btn-secondary">Explore More</a>
             </div>
 
-        </div>
-
+        </section>
     </section>
-</header>
+    <!--Packages section-->
+    <section class="packages-section">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px;">
+        <h2>Tour Packages</h2>
+        <p style="max-width:340px; font-size:0.88rem; color:#64748b; text-align:right; margin:0;">
+          Handpicked packages for every type of traveller — book your perfect trip today.
+        </p>
+      </div>
 
-<!-- CONTENT -->
-<section class="welcome">
-    <section class="text-center">
-        <h1>Welcome to "Dream Destination"</h1>
-        <h3>
-            "Travel far enough, you meet yourself,
-            Let us plan the journey you'll never forget."
-        </h3>
+      <div class="packages-container" id="pkgGrid">
 
-        <!-- REPLACE WITH -->
-        <div style="display:flex; gap:16px; justify-content:center; margin-top:32px;">
-            <a asp-controller="Book" asp-action="Book" class="hero-btn-primary">Book Trip</a>
-            <a asp-controller="Packages" asp-action="Index" class="hero-btn-secondary">Explore More</a>
+        <div class="package-item">
+          <img src="~/images/family.webp" alt="Family Package" />
+          <span class="pkg-pill">Family</span>
+          <span class="pkg-price">From ₹12,999</span>
+          <p>Kid-friendly stays, guided tours &amp; meals for everyone.</p>
         </div>
 
+        <div class="package-item">
+          <img src="~/images/friends.webp" alt="Friends Tour" />
+          <span class="pkg-pill">Friends</span>
+          <span class="pkg-price">From ₹8,499</span>
+          <p>Group adventures, shared stays &amp; endless memories.</p>
+        </div>
+
+        <div class="package-item">
+          <img src="~/images/couple.webp" alt="Couples Tour" />
+          <span class="pkg-pill">Couples</span>
+          <span class="pkg-price">From ₹9,999</span>
+          <p>Romantic escapes with private dining &amp; scenic views.</p>
+        </div>
+
+        <div class="package-item">
+          <img src="~/images/honeymoon.webp" alt="Honeymoon" />
+          <span class="pkg-pill">Honeymoon</span>
+          <span class="pkg-price">From ₹18,999</span>
+          <p>Luxury resorts, candle-lit evenings &amp; beach sunsets.</p>
+        </div>
+
+        <div class="package-item">
+          <img src="~/images/corporate.webp" alt="Office Outing" />
+          <span class="pkg-pill">Corporate</span>
+          <span class="pkg-price">From ₹6,499</span>
+          <p>Team bonding trips with activities &amp; group discounts.</p>
+        </div>
+
+        <div class="package-item">
+          <img src="~/images/combo1.webp" alt="Combo Offer" />
+          <span class="pkg-pill">Combo</span>
+          <span class="pkg-price">From ₹14,999</span>
+          <p>Multi-destination bundles with flights, hotels &amp; tours.</p>
+        </div>
+
+        <div class="package-item">
+          <img src="~/images/solo.webp" alt="Solo Travel" />
+          <span class="pkg-pill">Solo</span>
+          <span class="pkg-price">From ₹4,999</span>
+          <p>Budget-friendly plans for the fearless solo traveller.</p>
+        </div>
+
+      </div>
+
+      <div class="packages-footer">
+        <button class="btn-pkg-more"
+          onclick="document.getElementById('pkgGrid').classList.toggle('expanded');
+                   this.textContent = this.textContent.includes('more') ? 'View less' : 'View more';">
+          View more
+        </button>
+      </div>
     </section>
-</section>
-<!--Packages section-->
-<section class="packages-section">
-  <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px;">
-    <h2>Tour Packages</h2>
-    <p style="max-width:340px; font-size:0.88rem; color:#64748b; text-align:right; margin:0;">
-      Handpicked packages for every type of traveller — book your perfect trip today.
-    </p>
-  </div>
 
-  <div class="packages-container" id="pkgGrid">
+        <!-- WHY CHOOSE US -->
+    <section class="why-us">
+        <h2>Why Choose QuestVoyage?</h2>
 
-    <div class="package-item">
-      <img src="~/images/family.webp" alt="Family Package" />
-      <span class="pkg-pill">Family</span>
-      <span class="pkg-price">From ₹12,999</span>
-      <p>Kid-friendly stays, guided tours &amp; meals for everyone.</p>
-    </div>
+        <div class="why-container">
+            <div class="why-card">
+                <h3>🌍 Best Destinations</h3>
+                <p>Handpicked locations across the world for unforgettable experiences.</p>
+            </div>
 
-    <div class="package-item">
-      <img src="~/images/friends.webp" alt="Friends Tour" />
-      <span class="pkg-pill">Friends</span>
-      <span class="pkg-price">From ₹8,499</span>
-      <p>Group adventures, shared stays &amp; endless memories.</p>
-    </div>
+            <div class="why-card">
+                <h3>💰 Affordable Packages</h3>
+                <p>Travel more while spending less with our exclusive deals.</p>
+            </div>
 
-    <div class="package-item">
-      <img src="~/images/couple.webp" alt="Couples Tour" />
-      <span class="pkg-pill">Couples</span>
-      <span class="pkg-price">From ₹9,999</span>
-      <p>Romantic escapes with private dining &amp; scenic views.</p>
-    </div>
+            <div class="why-card">
+                <h3>⭐ Trusted by Travelers</h3>
+                <p>Thousands of happy customers with 5-star experiences.</p>
+            </div>
 
-    <div class="package-item">
-      <img src="~/images/honeymoon.webp" alt="Honeymoon" />
-      <span class="pkg-pill">Honeymoon</span>
-      <span class="pkg-price">From ₹18,999</span>
-      <p>Luxury resorts, candle-lit evenings &amp; beach sunsets.</p>
-    </div>
-
-    <div class="package-item">
-      <img src="~/images/corporate.webp" alt="Office Outing" />
-      <span class="pkg-pill">Corporate</span>
-      <span class="pkg-price">From ₹6,499</span>
-      <p>Team bonding trips with activities &amp; group discounts.</p>
-    </div>
-
-    <div class="package-item">
-      <img src="~/images/combo1.webp" alt="Combo Offer" />
-      <span class="pkg-pill">Combo</span>
-      <span class="pkg-price">From ₹14,999</span>
-      <p>Multi-destination bundles with flights, hotels &amp; tours.</p>
-    </div>
-
-    <div class="package-item">
-      <img src="~/images/solo.webp" alt="Solo Travel" />
-      <span class="pkg-pill">Solo</span>
-      <span class="pkg-price">From ₹4,999</span>
-      <p>Budget-friendly plans for the fearless solo traveller.</p>
-    </div>
-
-  </div>
-
-  <div class="packages-footer">
-    <button class="btn-pkg-more"
-      onclick="document.getElementById('pkgGrid').classList.toggle('expanded');
-               this.textContent = this.textContent.includes('more') ? 'View less' : 'View more';">
-      View more
-    </button>
-  </div>
-</section>
-
-    <!-- WHY CHOOSE US -->
-<section class="why-us">
-    <h2>Why Choose QuestVoyage?</h2>
-
-    <div class="why-container">
-        <div class="why-card">
-            <h3>🌍 Best Destinations</h3>
-            <p>Handpicked locations across the world for unforgettable experiences.</p>
-        </div>
-
-        <div class="why-card">
-            <h3>💰 Affordable Packages</h3>
-            <p>Travel more while spending less with our exclusive deals.</p>
-        </div>
-
-        <div class="why-card">
-            <h3>⭐ Trusted by Travelers</h3>
-            <p>Thousands of happy customers with 5-star experiences.</p>
-        </div>
-
-        <div class="why-card">
-            <h3>📞 24/7 Support</h3>
-            <p>We are here for you anytime, anywhere.</p>
-        </div>
-    </div>
-</section>
-
-
-<!-- FEATURED PACKAGES -->
-<section class="about-section">
-    <div class="about-inner">
-
-        <!-- Left: Text Content -->
-        <div class="about-text">
-            <h2>Who Are We?</h2>
-            <div class="about-underline"></div>
-            <p>
-                Founded in 2019, our travel agency began with a simple vision — to make travel
-                planning easy, reliable, and enjoyable for everyone. What started as a small team
-                with a passion for travel has grown into a trusted agency serving customers across
-                multiple cities.
-            </p>
-            <p>
-                We specialize in creating personalized travel experiences for families, couples,
-                friends, and corporate groups. Our services include flight bookings, hotel
-                reservations, tour packages, and complete travel assistance from start to finish.
-            </p>
-            <p>
-                With branch offices in major locations, we stay connected with our customers and
-                provide timely support. We believe in transparency, customer satisfaction, and
-                continuous improvement — turning travel dreams into memorable experiences.
-            </p>
-
-            <!-- Stats Row -->
-            <div class="about-stats">
-                <div class="stat-item">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">Years Experience</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number">10k+</span>
-                    <span class="stat-label">Happy Travellers</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Destinations</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Branch Offices</span>
-                </div>
+            <div class="why-card">
+                <h3>📞 24/7 Support</h3>
+                <p>We are here for you anytime, anywhere.</p>
             </div>
         </div>
+    </section>
 
-        <!-- Right: Image Grid -->
-        <div class="about-images">
-            <div class="about-img-main">
-                <img src="~/images/paris.jpg" alt="Travel" />
-            </div>
-            <div class="about-img-grid">
-                <img src="~/images/tokyo.jpg" alt="Tokyo" />
-                <img src="~/images/maldives.webp" alt="Maldives" />
-                <img src="~/images/kerala.webp" alt="Kerala" />
-                <div class="about-img-badge">
-                    <span>⭐</span>
-                    <strong>Since 2019</strong>
-                    <small>Trusted Agency</small>
+
+    <!-- FEATURED PACKAGES -->
+    <section class="about-section">
+        <div class="about-inner">
+
+            <!-- Left: Text Content -->
+            <div class="about-text">
+                <h2>Who Are We?</h2>
+                <div class="about-underline"></div>
+                <p>
+                    Founded in 2019, our travel agency began with a simple vision — to make travel
+                    planning easy, reliable, and enjoyable for everyone. What started as a small team
+                    with a passion for travel has grown into a trusted agency serving customers across
+                    multiple cities.
+                </p>
+                <p>
+                    We specialize in creating personalized travel experiences for families, couples,
+                    friends, and corporate groups. Our services include flight bookings, hotel
+                    reservations, tour packages, and complete travel assistance from start to finish.
+                </p>
+                <p>
+                    With branch offices in major locations, we stay connected with our customers and
+                    provide timely support. We believe in transparency, customer satisfaction, and
+                    continuous improvement — turning travel dreams into memorable experiences.
+                </p>
+
+                <!-- Stats Row -->
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">Happy Travellers</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Destinations</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Branch Offices</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- Right: Image Grid -->
+            <div class="about-images">
+                <div class="about-img-main">
+                    <img src="~/images/paris.jpg" alt="Travel" />
+                </div>
+                <div class="about-img-grid">
+                    <img src="~/images/tokyo.jpg" alt="Tokyo" />
+                    <img src="~/images/maldives.webp" alt="Maldives" />
+                    <img src="~/images/kerala.webp" alt="Kerala" />
+                    <div class="about-img-badge">
+                        <span>⭐</span>
+                        <strong>Since 2019</strong>
+                        <small>Trusted Agency</small>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </section>
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <h2>What Our Travelers Say</h2>
 
-    </div>
-</section>
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-    <h2>What Our Travelers Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card">
+                <p>"Amazing experience! Everything was smooth and well planned."</p>
+                <h4>- Rahul</h4>
+            </div>
 
-    <div class="testimonial-container">
-        <div class="testimonial-card">
-            <p>"Amazing experience! Everything was smooth and well planned."</p>
-            <h4>- Rahul</h4>
+            <div class="testimonial-card">
+                <p>"Best travel service I’ve used. Highly recommended!"</p>
+                <h4>- Priya</h4>
+            </div>
+
+            <div class="testimonial-card">
+                <p>"Affordable and premium at the same time. Loved it!"</p>
+                <h4>- Arjun</h4>
+            </div>
         </div>
-
-        <div class="testimonial-card">
-            <p>"Best travel service I’ve used. Highly recommended!"</p>
-            <h4>- Priya</h4>
-        </div>
-
-        <div class="testimonial-card">
-            <p>"Affordable and premium at the same time. Loved it!"</p>
-            <h4>- Arjun</h4>
-        </div>
-    </div>
-</section>
+    </section>
 
 
-<!-- CALL TO ACTION -->
+    <!-- CALL TO ACTION -->
 
-  <section class="newsletter-section">
-    <h2>Subscribe to Our Newsletter</h2>
-    <p>
-        Get exclusive travel deals, destination guides, and special offers
-        delivered to your inbox!
-    </p>
-    <form id="subscribeForm">
-  <input id="nameInput" name="Name" type="text" />
-  <input id="emailInput" name="Email" type="email" />
-  <button type="submit">Subscribe</button>
-</form>
-<div id="subscribeMessage"></div>
+      <section class="newsletter-section">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>
+            Get exclusive travel deals, destination guides, and special offers
+            delivered to your inbox!
+        </p>
+        <form id="subscribeForm">
+      <input id="nameInput" name="Name" type="text" placeholder="Enter your Name"/>
+      <input id="emailInput" name="Email" type="email" placeholder="Enter your Email" />
+      <button type="submit">Subscribe</button>
+    </form>
+    <div id="subscribeMessage"></div>
 
-    <span class="note">No spam. Unsubscribe anytime.</span>
-</section>
-<footer class="footer">
+        <span class="note">No spam. Unsubscribe anytime.</span>
+    </section>
+    <footer class="footer">
    
-    <div class="footer-top">
+        <div class="footer-top">
 
-        <!-- Column 1: Brand -->
-        <div class="footer-brand">
-            <div class="footer-logo">
-                <img src="~/images/logo.jpg" alt="QuestVoyage" style="height:40px;" />
-                <span>QuestVoyage</span>
+            <!-- Column 1: Brand -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="~/images/logo.jpg" alt="QuestVoyage" style="height:40px;" />
+                    <span>QuestVoyage</span>
+                </div>
+                <p class="footer-tagline">
+                    Your trusted travel partner for unforgettable journeys across the world.
+                </p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com" class="social-btn">
+                        <img src="~/images/Insta.png" alt="Instagram" />
+                    </a>
+                    <a href="https://www.facebook.com" class="social-btn">
+                        <img src="~/images/Face.png" alt="Facebook" />
+                    </a>
+                    <a href="https://www.twitter.com" class="social-btn">
+                        <img src="~/images/twitterss.png" alt="Twitter" />
+                    </a>
+                </div>
             </div>
-            <p class="footer-tagline">
-                Your trusted travel partner for unforgettable journeys across the world.
-            </p>
-            <div class="footer-social">
-                <a href="https://www.instagram.com" class="social-btn">
-                    <img src="~/images/Insta.png" alt="Instagram" />
-                </a>
-                <a href="https://www.facebook.com" class="social-btn">
-                    <img src="~/images/Face.png" alt="Facebook" />
-                </a>
-                <a href="https://www.twitter.com" class="social-btn">
-                    <img src="~/images/twitterss.png" alt="Twitter" />
-                </a>
+
+            <!-- Column 2: Branch Offices -->
+            <div class="footer-col">
+                <h4>Branch Offices</h4>
+                <ul>
+                    <li>📍 Chennai</li>
+                    <li>📍 Bangalore</li>
+                    <li>📍 Kochi</li>
+                    <li>📍 Delhi</li>
+                </ul>
             </div>
-        </div>
 
-        <!-- Column 2: Branch Offices -->
-        <div class="footer-col">
-            <h4>Branch Offices</h4>
-            <ul>
-                <li>📍 Chennai</li>
-                <li>📍 Bangalore</li>
-                <li>📍 Kochi</li>
-                <li>📍 Delhi</li>
-            </ul>
-        </div>
+            <!-- Column 3: Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-contact">
+                    <li>📞 +91 98765 43210</li>
+                    <li>✉️ support@questvoyage.com</li>
+                    <li><a href="https://maps.google.com">📍 View on Map</a></li>
+                </ul>
+            </div>
 
-        <!-- Column 3: Contact -->
-        <div class="footer-col">
-            <h4>Contact Us</h4>
-            <ul class="footer-contact">
-                <li>📞 +91 98765 43210</li>
-                <li>✉️ support@questvoyage.com</li>
-                <li><a href="https://maps.google.com">📍 View on Map</a></li>
-            </ul>
         </div>
-
-    </div>
        
 
-    <!-- Divider -->
-    <div class="footer-divider"></div>
+        <!-- Divider -->
+        <div class="footer-divider"></div>
 
-    <!-- Bottom Bar -->
-    <div class="footer-bottom">
-        <p>© 2026 QuestVoyage. All Rights Reserved.</p>
-        <div class="footer-bottom-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <p>© 2026 QuestVoyage. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const hamburger = document.getElementById("hamburger");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
-        const closeBtn = document.getElementById("closeBtn");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.getElementById("hamburger");
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+            const closeBtn = document.getElementById("closeBtn");
 
-        if (hamburger) {
-            hamburger.addEventListener("click", function () {
-                sidebar.classList.add("open");
-                overlay.classList.add("show");
-            });
-        }
+            if (hamburger) {
+                hamburger.addEventListener("click", function () {
+                    sidebar.classList.add("open");
+                    overlay.classList.add("show");
+                });
+            }
 
-        if (closeBtn) {
-            closeBtn.addEventListener("click", function () {
-                sidebar.classList.remove("open");
-                overlay.classList.remove("show");
-            });
-        }
+            if (closeBtn) {
+                closeBtn.addEventListener("click", function () {
+                    sidebar.classList.remove("open");
+                    overlay.classList.remove("show");
+                });
+            }
 
-        if (overlay) {
-            overlay.addEventListener("click", function () {
-                sidebar.classList.remove("open");
-                overlay.classList.remove("show");
-            });
-        }
-    });
-</script>
+            if (overlay) {
+                overlay.addEventListener("click", function () {
+                    sidebar.classList.remove("open");
+                    overlay.classList.remove("show");
+                }); 
+            }
+        });
+    </script>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="~/js/auth.js"></script>
-<script src="~/js/newsletter.js"></script>
-<script src="~/js/script.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/js/auth.js"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>

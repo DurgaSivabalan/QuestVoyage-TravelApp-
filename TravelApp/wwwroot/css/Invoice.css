@@ -244,3 +244,91 @@ tr:hover td {
         border: 1px solid #ffccb3 !important;
     }
 }
+@media (max-width: 768px) {
+
+    /* Container */
+    .invoice-box {
+        padding: 28px 24px;
+        margin: 20px;
+    }
+
+    /* Header */
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .title {
+        text-align: left;
+    }
+
+    /* Table scroll */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Total section */
+    .total {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Container */
+    .invoice-box {
+        padding: 20px 14px;
+        border-radius: 12px;
+    }
+
+    /* Logo */
+    .logo {
+        width: 44px;
+        height: 44px;
+    }
+
+    /* Title */
+    .title h2 {
+        font-size: 1.3rem;
+    }
+
+    .title p {
+        font-size: 0.72rem;
+    }
+
+    /* Section headings */
+    h3 {
+        font-size: 0.68rem;
+    }
+
+    /* Text */
+    p {
+        font-size: 0.8rem;
+    }
+
+    /* Table */
+    th, td {
+        font-size: 0.75rem;
+        padding: 8px;
+    }
+
+    /* Total */
+    .total b {
+        font-size: 1.1rem;
+    }
+
+    /* Buttons */
+    .print-btn {
+        font-size: 0.85rem;
+        padding: 12px;
+    }
+
+    .home-btn {
+        font-size: 0.8rem;
+        padding: 8px 18px;
+    }
+}

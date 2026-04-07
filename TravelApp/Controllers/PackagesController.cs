@@ -19,14 +19,14 @@ namespace TravelApp.Controllers
         [HttpPost]
         public IActionResult Create(Package model, IFormFile imageFile)
         {
-            // 🔥 VALIDATION (STEP 3)
+            //Validation (Step 3)
             if (string.IsNullOrEmpty(model.Name))
                 return Content("Name is required");
 
             if (string.IsNullOrEmpty(model.Type))
                 return Content("Type is required");
 
-            // IMAGE
+            // Image
             if (imageFile != null)
             {
                 using (var ms = new MemoryStream())
@@ -41,10 +41,21 @@ namespace TravelApp.Controllers
 
             return RedirectToAction("Index");
         }
-       
-        public IActionResult Index()
+
+        public IActionResult Index(int page = 1)
         {
-            var data = _context.Packages.ToList();
+            int pageSize = 7; // show 4 cards per page
+
+            var totalItems = _context.Packages.Count();
+
+            var data = _context.Packages
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
             return View(data);
         }
     }

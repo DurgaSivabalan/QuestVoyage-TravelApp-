@@ -10,7 +10,10 @@ body {
     font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
 }
-
+.text-danger {
+    color: red;
+    margin-bottom: 10px;
+}
 /* ── Full page: background image ── */
 .auth-container {
     width: 100%;

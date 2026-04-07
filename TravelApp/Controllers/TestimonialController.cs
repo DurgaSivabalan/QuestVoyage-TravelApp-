@@ -11,7 +11,7 @@ public class TestimonialController : Controller
     {
         _context = context;
     }
-
+    //showing reviews
     public IActionResult Testimonial()
     {
         var reviews = _context.Reviews.ToList();
@@ -19,6 +19,8 @@ public class TestimonialController : Controller
       
         return View(reviews);
     }
+
+    //mark review as helpful
     [HttpPost]
     public IActionResult MarkHelpful(int id)
     {
@@ -30,6 +32,8 @@ public class TestimonialController : Controller
 
         return RedirectToAction("Testimonial");
     }
+
+    //adding review
     [HttpPost]
     public IActionResult AddReview(Review review)
     {

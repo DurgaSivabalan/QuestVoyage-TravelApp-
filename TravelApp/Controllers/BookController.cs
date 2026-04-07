@@ -22,7 +22,7 @@ public class BookController : Controller
             return View(booking);
         }
 
-        // 🔥 STORE IN SESSION
+        //STORE IN SESSION
         var json = JsonConvert.SerializeObject(booking);
         HttpContext.Session.SetString("BookingData", json);
 
@@ -45,24 +45,41 @@ public class BookController : Controller
 
         return RedirectToAction("History");
     }
-  
+
     // OPEN BOOK PAGE
-    public IActionResult Book()
+    public IActionResult Book(int? packageId)
     {
         var data = HttpContext.Session.GetString("BookingData");
 
-        // Send Packages list to View
-        ViewBag.Packages = _context.Packages.ToList();
-
         if (data != null)
         {
-            var booking = JsonConvert.DeserializeObject<Booking>(data);
-            return View(booking);
+            var booking = Newtonsoft.Json.JsonConvert.DeserializeObject<Booking>(data);
+
+            ViewBag.Packages = _context.Packages.ToList();
+
+            return View(booking); 
+        }
+    
+     
+    
+        // fallback (new booking)
+        if (packageId != null)
+        {
+            var package = _context.Packages.FirstOrDefault(p => p.Id == packageId);
+            if (package != null)
+            {
+                ViewBag.SelectedPackage = package;
+            }
         }
 
-        return View(new Booking());
+        ViewBag.Packages = _context.Packages.ToList();
+        return View();
     }
-
+    public JsonResult GetPrice(int packageId)
+    {
+        var pkg = _context.Packages.FirstOrDefault(p => p.Id == packageId);
+        return Json(new { price = pkg?.Price ?? 0 });
+    }
     // STEP 1 → SUMMARY{Showing Summary}
     [HttpGet]
     public IActionResult Summary()
@@ -81,18 +98,16 @@ public class BookController : Controller
     [HttpPost]
     public IActionResult Summary(Booking booking)
     {
-        // 🔥 IMPORTANT FIX
         if (booking.Travellers == null)
         {
             booking.Travellers = new List<Traveller>();
         }
 
-        // DEBUG
-        //Console.WriteLine("Traveller count: " + booking.Travellers.Count);
-
+        // debug
+        // get the package details from db
         var package = _context.Packages
     .FirstOrDefault(p => p.Id == booking.PackageId);
-
+        //getting package id from packages top store in booking
         if (package == null)
         {
             return Content("Package not found");
@@ -104,27 +119,43 @@ public class BookController : Controller
         booking.Members = booking.Adults + booking.Children;
         booking.TotalAmount = booking.Price * booking.Members;
 
-        // 🔥 STORE FULL DATA
+        //store full data in session for next steps
         var json = JsonConvert.SerializeObject(booking);
         HttpContext.Session.SetString("BookingData", json);
 
+        Console.WriteLine("SESSION SAVED: " + json);
+
         return View("~/Views/Summary/Summary.cshtml", booking);
     }
+
+    //confirm method after payment.
     [HttpPost]
     public IActionResult Confirm(Booking booking)
     {
         if (booking == null)
             return RedirectToAction("Book");
 
-        // 🔥 DEBUG (check value)
-        Console.WriteLine("Final Amount Received: " + booking.TotalAmount);
-
+        // Get logged user
         booking.UserEmail = HttpContext.Session.GetString("User");
 
-        // defaults
-        booking.PaymentMethod ??= "UPI";
-        booking.PaymentStatus ??= "Pending";
+        // GET REAL PACKAGE FROM DB
+        var package = _context.Packages
+            .FirstOrDefault(p => p.Name == booking.PackageName);
 
+        if (package == null)
+            return BadRequest("Invalid package");
+
+        // RE-CALCULATE TOTAL (DO NOT TRUST FRONTEND)
+        var actualAmount = package.Price * booking.Members;
+        booking.TotalAmount = actualAmount;
+
+        //CONTROL PAYMENT STATUS IN BACKEND ONLY
+        booking.PaymentMethod = string.IsNullOrEmpty(booking.PaymentMethod) ? "UPI" : booking.PaymentMethod;
+
+        // ❌ IGNORE frontend PaymentStatus
+        booking.PaymentStatus = "Pending"; // or "Pending" if you want stricter flow
+
+        // STATUS MAPPING
         booking.Status = booking.PaymentStatus switch
         {
             "Paid" => "Confirmed",
@@ -143,28 +174,28 @@ public class BookController : Controller
             }
         }
 
-        // 🔥 SAVE
+        // SAVE
         _context.Bookings.Add(booking);
         _context.SaveChanges();
 
-        // optional: clear session
+        // clear session
         HttpContext.Session.Remove("BookingData");
 
         return RedirectToAction("Invoice", new { id = booking.Id });
     }
     [HttpGet]
-    public IActionResult Payment()
-    {
-        var data = HttpContext.Session.GetString("BookingData");
-
-        if (data != null)
+        public IActionResult Payment()
         {
-            var booking = JsonConvert.DeserializeObject<Booking>(data);
-            return View("~/Views/Payment/Payment.cshtml", booking);
-        }
+            var data = HttpContext.Session.GetString("BookingData");
 
-        return RedirectToAction("Book");
-    }
+            if (data != null)
+            {
+                var booking = JsonConvert.DeserializeObject<Booking>(data);
+                return View("~/Views/Payment/Payment.cshtml", booking);
+            }
+
+            return RedirectToAction("Book");
+        }
   
     public IActionResult Invoice(int id)
     {

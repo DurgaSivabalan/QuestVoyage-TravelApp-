@@ -12,11 +12,12 @@
 
 /* ===== Header ===== */
 .wishlist-header {
-    display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 48px;
 }
+
+
 
 .wishlist-eyebrow {
     display: block;
@@ -25,7 +26,6 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #ff6b35;
-    margin-bottom: 8px;
 }
 
 .wishlist-title {
@@ -34,7 +34,10 @@
     font-weight: 700;
     color: #ffffff;
     margin: 0 0 10px 0;
-    line-height: 1.15;
+    text-align:center;
+padding-bottom:10px;
+
+
 }
 
 
@@ -260,3 +263,115 @@
         transform: translateY(-2px);
         box-shadow: 0 8px 24px rgba(255,107,53,0.45);
     }
+@media (max-width: 768px) {
+
+    /* Page padding fix */
+    .wishlist-page {
+        padding: 20px 16px;
+    }
+
+    /* Header */
+    .wishlist-title {
+        font-size: 2rem;
+    }
+
+    /* Grid spacing */
+    .wishlist-container {
+        gap: 18px;
+    }
+
+    /* Card image */
+    .card-image {
+        height: 180px;
+    }
+
+    /* Footer */
+    .card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Button full width */
+    .book-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Page padding */
+    .wishlist-page {
+        padding: 16px 12px;
+    }
+
+    /* Title */
+    .wishlist-title {
+        font-size: 1.6rem;
+    }
+
+    /* Card */
+    .wishlist-card {
+        border-radius: 14px;
+    }
+
+    /* Image */
+    .card-image {
+        height: 150px;
+    }
+
+    /* Overlay text */
+    .card-overlay h3 {
+        font-size: 0.9rem;
+    }
+
+    /* Body */
+    .card-body {
+        padding: 14px;
+    }
+
+    /* Description */
+    .card-desc {
+        font-size: 0.75rem;
+    }
+
+    /* Price */
+    .card-price {
+        font-size: 1.1rem;
+    }
+
+    /* Footer stack */
+    .card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    /* Button */
+    .book-btn {
+        width: 100%;
+        font-size: 0.75rem;
+        padding: 10px;
+    }
+
+    /* Remove button */
+    .remove-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.65rem;
+    }
+
+    /* Empty state */
+    .empty-icon {
+        font-size: 3rem;
+    }
+
+    .empty-state h2 {
+        font-size: 1.4rem;
+    }
+
+    .explore-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

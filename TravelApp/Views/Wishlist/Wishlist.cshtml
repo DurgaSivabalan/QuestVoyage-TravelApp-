@@ -1,5 +1,7 @@
 ﻿@model List<TravelApp.Models.Package>
-
+@{
+    ViewData["Title"] = "Wishlist";
+}
 <link rel="stylesheet" href="~/css/Wishlist.css" />
 
 <div class="wishlist-page">
@@ -10,7 +12,7 @@
             <h1 class="wishlist-title">My Wishlist</h1>
             <div class="wishlist-underline"></div>
         </div>
-   
+    </div>
        @if (Model.Any())
     {
         <div class="wishlist-container">
@@ -46,15 +48,15 @@
                                 <span class="card-price-label">Starting from</span>
                                 <span class="card-price">₹@item.Price.ToString("N0")</span>
                             </div>
-                            <a href="/Book/Book/@item.Id" class="book-btn">Book Now →</a>
-                        </div>
+                                <a href="/Book/Book?packageId=@item.Id" class="book-btn">Book Now</a>
+                            </div>
                     </div>
 
                 </div>
             }
         </div>
     }
-    else
+    else    
     {
         <!-- Empty state -->
         <div class="empty-state">

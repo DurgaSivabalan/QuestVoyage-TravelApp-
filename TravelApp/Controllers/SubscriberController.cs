@@ -35,7 +35,7 @@ namespace TravelApp.Controllers
             _context.SaveChanges();
 
             Console.WriteLine("Subscribe UI");
-            return Json(new { success = true, message = "Subscribed successfully ✅" });
+            return Json(new { success = true, message = "Subscribed successfully " });
         }
 
 

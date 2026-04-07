@@ -269,3 +269,90 @@ main {
         text-decoration: none;
         font-family: 'DM Sans', sans-serif;
     }
+@media (max-width: 1024px) {
+
+    /* Flights & Places → 2 columns */
+    .flights1,
+    .places1 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Hotels → 2 columns */
+    .Hotels1 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Wrapper padding */
+    .every {
+        padding: 20px;
+    }
+}
+@media (max-width: 768px) {
+
+    /* ALL → single column */
+    .flights1,
+    .places1,
+    .Hotels1 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Cards center properly */
+    .indigo,
+    .airindia,
+    .spicejet,
+    .Taj,
+    .Raj,
+    .Aaj,
+    .lake,
+    .desert,
+    .city,
+    .hill {
+        padding: 16px;
+    }
+
+    /* Remove weird spacing from inline styles */
+    .flights1 img,
+    .places1 img {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    /* Section spacing */
+    .flights,
+    .places,
+    .Hotels {
+        margin-bottom: 40px;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Heading */
+    .every h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Text */
+    .places1 p,
+    .Hotels1 ul li,
+    .flights1 ul li {
+        font-size: 0.75rem;
+    }
+
+    /* Cards compact */
+    .indigo,
+    .airindia,
+    .spicejet,
+    .lake,
+    .desert,
+    .city,
+    .hill {
+        padding: 14px;
+    }
+
+    /* Buttons */
+    .Hotels1 button a {
+        font-size: 0.75rem;
+        padding: 8px;
+    }
+}
